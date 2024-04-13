@@ -3,11 +3,10 @@ package main
 import (
 	"fmt"
 	"html/template"
-	"log"
 	"net/http"
 )
 
-func home(w http.ResponseWriter, r *http.Request) {
+func (app *application) home(w http.ResponseWriter, r *http.Request) {
 	files := []string{
 		"./ui/html/base.tmpl.html",
 		"./ui/html/pages/home.tmpl.html",
@@ -16,22 +15,22 @@ func home(w http.ResponseWriter, r *http.Request) {
 
 	ts, err := template.ParseFiles(files...)
 	if err != nil {
-		log.Printf("Could not parse template set in HOME handler: %v", err.Error())
-		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+		app.serverError(w, r, err)
+		return
 	}
 
 	err = ts.ExecuteTemplate(w, "base", nil)
 	if err != nil {
-		log.Printf("Could not write templated response in HOME handler: %v", err.Error())
-		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+		app.serverError(w, r, err)
+		return
 	}
 }
 
-func about(w http.ResponseWriter, r *http.Request) {
+func (app *application) about(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte("About me page..."))
 }
 
-func post(w http.ResponseWriter, r *http.Request) {
+func (app *application) post(w http.ResponseWriter, r *http.Request) {
 	slug := r.PathValue("slug")
 
 	// validate slug
@@ -39,10 +38,10 @@ func post(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "Show a specific blog post at slug: %v", slug)
 }
 
-func posts(w http.ResponseWriter, r *http.Request) {
+func (app *application) posts(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte("List all the blog posts..."))
 }
 
-func projects(w http.ResponseWriter, r *http.Request) {
+func (app *application) projects(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte("List all my projects..."))
 }

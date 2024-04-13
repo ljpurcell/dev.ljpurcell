@@ -2,11 +2,15 @@ package main
 
 import (
 	"flag"
-	"log"
 	"log/slog"
 	"net/http"
 	"os"
 )
+
+// To hold application dependencies, enabling dependency injection
+type application struct {
+	logger *slog.Logger
+}
 
 func main() {
 
@@ -15,7 +19,13 @@ func main() {
 	staticDir := flag.String("staticDir", "./ui/static/", "HTTP network address")
 	flag.Parse()
 
-	logger := slog.New(slog.NewTextHandler(os.Stdout, nil))
+	logger := slog.New(slog.NewTextHandler(os.Stdout, &slog.HandlerOptions{
+		AddSource: true,
+	}))
+
+	app := &application{
+		logger: logger,
+	}
 
 	mux := http.NewServeMux()
 
@@ -25,14 +35,15 @@ func main() {
 	mux.Handle("GET /static/", http.StripPrefix("/static", fileServer))
 
 	// Application routes
-	mux.HandleFunc("GET /{$}", home)
-	mux.HandleFunc("GET /about", about)
-	mux.HandleFunc("GET /post/{slug}", post)
-	mux.HandleFunc("GET /posts", posts)
-	mux.HandleFunc("GET /projects", projects)
+	mux.HandleFunc("GET /{$}", app.home)
+	mux.HandleFunc("GET /about", app.about)
+	mux.HandleFunc("GET /post/{slug}", app.post)
+	mux.HandleFunc("GET /posts", app.posts)
+	mux.HandleFunc("GET /projects", app.projects)
 
-	log.Printf("Starting server on %q\n", *addr)
+	logger.Info("Starting server...", "addr", *addr)
 
 	err := http.ListenAndServe(*addr, mux)
-	log.Fatal(err)
+	logger.Error(err.Error())
+	os.Exit(1)
 }
