@@ -3,6 +3,8 @@
 <html lang='en'>
 
 <head>
+    <link rel="stylesheet" href="/static/output.css" />
+    <link rel="stylesheet" href="https://cdn.xeiaso.net/static/pkg/iosevka/family.css" />
     <meta charset='utf-8'>
     <title>{{template "title" .}} - ljpurcell</title>
 </head>
@@ -11,10 +13,11 @@
     <header>
         <h1><a href='/'>ljpurcell</a></h1>
     </header>
+        {{template "nav" .}}
     <main>
         {{template "main" .}}
     </main>
-    <footer>
+    <footer class="font-bold">
         2024
     </footer>
 </body>
