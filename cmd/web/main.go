@@ -11,7 +11,8 @@ func main() {
 	mux := http.NewServeMux()
 
 	// File server to serve files out of ui/static directory
-	fileServer := http.FileServer(http.Dir("./ui/static/"))
+	fileServer := http.FileServer(safeFileSystem{http.Dir("./ui/static/")})
+	mux.Handle("GET /static", http.NotFoundHandler())
 	mux.Handle("GET /static/", http.StripPrefix("/static", fileServer))
 
 	// Application routes
