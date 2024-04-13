@@ -7,9 +7,14 @@ import (
 
 func main() {
 
-    const port = ":4000"
-
+	const port = ":4000"
 	mux := http.NewServeMux()
+
+	// File server to serve files out of ui/static directory
+	fileServer := http.FileServer(http.Dir("./ui/static/"))
+	mux.Handle("GET /static/", http.StripPrefix("/static", fileServer))
+
+	// Application routes
 	mux.HandleFunc("GET /{$}", home)
 	mux.HandleFunc("GET /about", about)
 	mux.HandleFunc("GET /post/{slug}", post)
