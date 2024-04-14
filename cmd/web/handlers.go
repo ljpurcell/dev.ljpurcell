@@ -45,3 +45,7 @@ func (app *application) posts(w http.ResponseWriter, r *http.Request) {
 func (app *application) projects(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte("List all my projects..."))
 }
+
+func (app *application) testMdPost(w http.ResponseWriter, r *http.Request) {
+	w.Write(app.renderMdFile(w, "./markdown/test.md"))
+}

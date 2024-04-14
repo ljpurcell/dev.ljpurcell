@@ -1,6 +1,9 @@
 package main
 
-import "net/http"
+import (
+	"net/http"
+	"os"
+)
 
 func (app *application) serverError(w http.ResponseWriter, r *http.Request, err error) {
 	method := r.Method
@@ -12,4 +15,14 @@ func (app *application) serverError(w http.ResponseWriter, r *http.Request, err 
 
 func (app *application) clientError(w http.ResponseWriter, status int) {
 	http.Error(w, http.StatusText(status), status)
+}
+
+func (app *application) renderMdFile(w http.ResponseWriter, file string) []byte {
+	b, err := os.ReadFile(file)
+	if err != nil {
+		app.clientError(w, 404)
+	}
+	w.Header().Set("Content-Type", "text/html; charset=utf-8")
+	return mdToHTML(b)
+
 }
