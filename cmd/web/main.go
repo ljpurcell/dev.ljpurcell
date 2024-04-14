@@ -2,6 +2,7 @@ package main
 
 import (
 	"flag"
+	"html/template"
 	"log/slog"
 	"net/http"
 	"os"
@@ -10,6 +11,13 @@ import (
 // To hold application dependencies, enabling dependency injection
 type application struct {
 	logger *slog.Logger
+}
+
+type post struct {
+	title   string
+	slug    string
+	content template.HTML
+	tags    []string
 }
 
 func main() {
@@ -40,6 +48,9 @@ func main() {
 	mux.HandleFunc("GET /post/{slug}", app.post)
 	mux.HandleFunc("GET /posts", app.posts)
 	mux.HandleFunc("GET /projects", app.projects)
+
+	// TEST ROUTES
+	mux.HandleFunc("GET /test", app.testMdPost)
 
 	logger.Info("Starting server...", "addr", *addr)
 
