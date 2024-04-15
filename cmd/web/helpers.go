@@ -17,12 +17,23 @@ func (app *application) clientError(w http.ResponseWriter, status int) {
 	http.Error(w, http.StatusText(status), status)
 }
 
-func (app *application) renderMdFile(w http.ResponseWriter, file string) []byte {
-	b, err := os.ReadFile(file)
+func (app *application) renderMdFile(w http.ResponseWriter, file string) ([]byte, error) {
+	contents, err := os.ReadFile(file)
 	if err != nil {
-		app.clientError(w, 404)
+		return nil, err
 	}
+
+	var (
+		b []byte
+		p post
+	)
+
+	err = parseMdFile(contents, &p, &b)
+	if err != nil {
+		return nil, err
+	}
+
 	w.Header().Set("Content-Type", "text/html; charset=utf-8")
-	return mdToHTML(b)
+	return mdToHTML(b), nil
 
 }

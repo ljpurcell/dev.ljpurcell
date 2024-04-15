@@ -14,10 +14,10 @@ type application struct {
 }
 
 type post struct {
-	title   string
-	slug    string
-	content template.HTML
-	tags    []string
+	title     string
+	slug      string
+	catergory string
+	content   template.HTML
 }
 
 func main() {
