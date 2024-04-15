@@ -47,5 +47,14 @@ func (app *application) projects(w http.ResponseWriter, r *http.Request) {
 }
 
 func (app *application) testMdPost(w http.ResponseWriter, r *http.Request) {
-	w.Write(app.renderMdFile(w, "./markdown/test.md"))
+	html, err := app.renderMdFile(w, "./markdown/test.md")
+	if err != nil {
+		/*
+		 * TODO: Check if file not found and return 404 if so
+		 */
+		app.serverError(w, r, err)
+		return
+	}
+
+	w.Write(html)
 }
