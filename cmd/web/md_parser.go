@@ -1,6 +1,8 @@
 package main
 
 import (
+	"html/template"
+	"os"
 	"strings"
 
 	"github.com/gomarkdown/markdown"
@@ -8,8 +10,15 @@ import (
 	"github.com/gomarkdown/markdown/parser"
 )
 
-func parseMdFile(content []byte, p *post, md *[]byte) error {
-	c := string(content)
+func (app *application) parseFileIntoPost(p *Post, file string) error {
+	contents, err := os.ReadFile(file)
+	if err != nil {
+		return err
+	}
+
+	c := string(contents)
+
+	// Extract front matter
 	seperators := 2
 	if !strings.HasPrefix(c, "---") {
 		seperators = 1
@@ -30,11 +39,13 @@ func parseMdFile(content []byte, p *post, md *[]byte) error {
 		}
 	}
 
-	p.title = metaMap["title"]
-	p.slug = metaMap["slug"]
-	p.catergory = metaMap["catergory"]
+	p.Title = metaMap["title"]
+	p.Slug = metaMap["slug"]
+	p.Catergory = metaMap["catergory"]
 
-	*md = mdToHTML([]byte(mu))
+	html := mdToHTML([]byte(mu))
+	p.Content = template.HTML(html)
+
 	return nil
 }
 
