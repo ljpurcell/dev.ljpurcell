@@ -47,8 +47,8 @@ func (app *application) projects(w http.ResponseWriter, r *http.Request) {
 }
 
 func (app *application) testMdPost(w http.ResponseWriter, r *http.Request) {
-	html, err := app.renderMdFile(w, "./markdown/test.md")
-	if err != nil {
+	p := &Post{}
+	if err := app.parseFileIntoPost(p, "./markdown/test.md"); err != nil {
 		/*
 		 * TODO: Check if file not found and return 404 if so
 		 */
@@ -56,5 +56,22 @@ func (app *application) testMdPost(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	w.Write(html)
+	files := []string{
+		"./ui/html/base.tmpl.html",
+		"./ui/html/partials/nav.tmpl.html",
+		"./ui/html/pages/post.tmpl.html",
+	}
+
+	ts, err := template.ParseFiles(files...)
+	if err != nil {
+		app.serverError(w, r, err)
+		return
+	}
+
+	w.Header().Set("Content-Type", "text/html; charset=utf-8")
+	err = ts.ExecuteTemplate(w, "base", p)
+	if err != nil {
+		app.serverError(w, r, err)
+		return
+	}
 }

@@ -13,11 +13,11 @@ type application struct {
 	logger *slog.Logger
 }
 
-type post struct {
-	title     string
-	slug      string
-	catergory string
-	content   template.HTML
+type Post struct {
+	Title     string
+	Slug      string
+	Catergory string
+	Content   template.HTML
 }
 
 func main() {
