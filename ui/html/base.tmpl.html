@@ -9,12 +9,9 @@
     <title>{{template "title" .}} - ljpurcell</title>
 </head>
 
-<body>
-    <header>
-        <h1><a href='/'>ljpurcell</a></h1>
-    </header>
-        {{template "nav" .}}
-    <main>
+<body class="bg-neutral-800 text-gray-300">
+    {{template "nav" .}}
+    <main class="container">
         {{template "main" .}}
     </main>
     <footer class="font-bold">
