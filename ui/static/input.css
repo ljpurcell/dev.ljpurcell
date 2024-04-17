@@ -2,3 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+  a {
+    @apply hover:underline decoration-purple-400;
+  }
+
+  pre {
+    @apply bg-neutral-900 p-4 my-6;
+  }
+
+  .container {
+    @apply mx-auto max-w-3xl 2xl:max-w-4xl;
+  }
+}
