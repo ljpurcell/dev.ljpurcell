@@ -11,7 +11,23 @@
     @apply bg-neutral-900 p-4 my-6;
   }
 
+  p, div {
+    @apply leading-relaxed;
+  }
+
+  .theme {
+    @apply bg-neutral-800 text-gray-300;
+  }
+
   .container {
     @apply mx-auto max-w-3xl 2xl:max-w-4xl;
+  }
+
+  .emphasize-most {
+    @apply text-cyan-300 font-extrabold;
+  }
+
+  .emphasize {
+    @apply text-zinc-400 font-bold;
   }
 }

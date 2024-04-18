@@ -1,12 +1,20 @@
 package main
 
 import (
+	"fmt"
 	"html/template"
+	"io"
 	"os"
 	"strings"
 
+	"github.com/alecthomas/chroma/v2"
+	"github.com/alecthomas/chroma/v2/formatters/html"
+	"github.com/alecthomas/chroma/v2/lexers"
+	"github.com/alecthomas/chroma/v2/styles"
+
 	"github.com/gomarkdown/markdown"
-	"github.com/gomarkdown/markdown/html"
+	"github.com/gomarkdown/markdown/ast"
+	mdHtml "github.com/gomarkdown/markdown/html"
 	"github.com/gomarkdown/markdown/parser"
 )
 
@@ -56,9 +64,68 @@ func mdToHTML(md []byte) []byte {
 	doc := p.Parse(md)
 
 	// Create HTML render with extensions
-	htmlFlags := html.CommonFlags | html.HrefTargetBlank
-	opts := html.RendererOptions{Flags: htmlFlags}
-	render := html.NewRenderer(opts)
+	htmlFlags := mdHtml.CommonFlags | mdHtml.HrefTargetBlank
+	opts := mdHtml.RendererOptions{Flags: htmlFlags, RenderNodeHook: myRenderHook}
+	render := mdHtml.NewRenderer(opts)
 
 	return markdown.Render(doc, render)
+}
+
+/**
+ * Syntax highlighting
+ */
+var (
+	htmlFormatter  *html.Formatter
+	highlightStyle *chroma.Style
+)
+
+func init() {
+	htmlFormatter = html.New(html.WithClasses(false), html.TabWidth(2))
+	if htmlFormatter == nil {
+		panic("couldn't create html formatter")
+	}
+
+	// Options:
+	// RosePint
+	// CatppuccinMocha
+	// GitHibDark
+	styleName := styles.GitHubDark.Name
+	highlightStyle = styles.Get(styleName)
+	if highlightStyle == nil {
+		panic(fmt.Sprintf("didn't find style '%s'", styleName))
+	}
+}
+
+func myRenderHook(w io.Writer, node ast.Node, entering bool) (ast.WalkStatus, bool) {
+	if code, ok := node.(*ast.CodeBlock); ok {
+		renderCode(w, code, entering)
+		return ast.GoToNext, true
+	}
+	return ast.GoToNext, false
+}
+
+func renderCode(w io.Writer, codeBlock *ast.CodeBlock, entering bool) {
+	defaultLang := "go"
+	lang := string(codeBlock.Info)
+	applyHighlighting(w, string(codeBlock.Literal), lang, defaultLang)
+}
+
+func applyHighlighting(w io.Writer, source, lang, defaultLang string) error {
+	if lang == "" {
+		lang = defaultLang
+	}
+	l := lexers.Get(lang)
+	if l == nil {
+		l = lexers.Analyse(source)
+	}
+	if l == nil {
+		l = lexers.Fallback
+	}
+	l = chroma.Coalesce(l)
+
+	it, err := l.Tokenise(nil, source)
+	if err != nil {
+		return err
+	}
+	return htmlFormatter.Format(w, highlightStyle, it)
 }
