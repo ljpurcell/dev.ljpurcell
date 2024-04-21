@@ -1,16 +1,13 @@
 package main
 
 import (
-	"fmt"
 	"html/template"
 	"io"
 	"os"
 	"strings"
 
 	"github.com/alecthomas/chroma/v2"
-	"github.com/alecthomas/chroma/v2/formatters/html"
 	"github.com/alecthomas/chroma/v2/lexers"
-	"github.com/alecthomas/chroma/v2/styles"
 
 	"github.com/gomarkdown/markdown"
 	"github.com/gomarkdown/markdown/ast"
@@ -41,8 +38,8 @@ func (app *application) parseFileIntoPost(p *Post, file string) error {
 	for _, line := range metaLines {
 		fieldVal := strings.SplitN(line, ":", 2)
 		if len(fieldVal) == 2 {
-			field := strings.ToLower(strings.TrimSpace(fieldVal[0]))
-			value := strings.TrimSpace(fieldVal[1])
+			field := strings.ToLower(strings.Trim(fieldVal[0], " \""))
+			value := strings.Trim(fieldVal[1], " \"")
 			metaMap[field] = value
 		}
 	}
@@ -51,13 +48,13 @@ func (app *application) parseFileIntoPost(p *Post, file string) error {
 	p.Slug = metaMap["slug"]
 	p.Catergory = metaMap["catergory"]
 
-	html := mdToHTML([]byte(mu))
+	html := app.mdToHTML([]byte(mu))
 	p.Content = template.HTML(html)
 
 	return nil
 }
 
-func mdToHTML(md []byte) []byte {
+func (app *application) mdToHTML(md []byte) []byte {
 	// Create MD parser with extensions
 	extensions := parser.CommonExtensions | parser.AutoHeadingIDs | parser.NoEmptyLineBeforeBlock
 	p := parser.NewWithExtensions(extensions)
@@ -65,7 +62,7 @@ func mdToHTML(md []byte) []byte {
 
 	// Create HTML render with extensions
 	htmlFlags := mdHtml.CommonFlags | mdHtml.HrefTargetBlank
-	opts := mdHtml.RendererOptions{Flags: htmlFlags, RenderNodeHook: myRenderHook}
+	opts := mdHtml.RendererOptions{Flags: htmlFlags, RenderNodeHook: app.myRenderHook}
 	render := mdHtml.NewRenderer(opts)
 
 	return markdown.Render(doc, render)
@@ -74,43 +71,24 @@ func mdToHTML(md []byte) []byte {
 /**
  * Syntax highlighting
  */
-var (
-	htmlFormatter  *html.Formatter
-	highlightStyle *chroma.Style
-)
-
-func init() {
-	htmlFormatter = html.New(html.WithClasses(false), html.TabWidth(2))
-	if htmlFormatter == nil {
-		panic("couldn't create html formatter")
-	}
-
-	// Options:
-	// RosePint
-	// CatppuccinMocha
-	// GitHibDark
-	styleName := styles.GitHubDark.Name
-	highlightStyle = styles.Get(styleName)
-	if highlightStyle == nil {
-		panic(fmt.Sprintf("didn't find style '%s'", styleName))
-	}
-}
-
-func myRenderHook(w io.Writer, node ast.Node, entering bool) (ast.WalkStatus, bool) {
-	if code, ok := node.(*ast.CodeBlock); ok {
-		renderCode(w, code, entering)
+func (app *application) myRenderHook(w io.Writer, node ast.Node, entering bool) (ast.WalkStatus, bool) {
+	// TODO: work out how to style inline code
+	if code, ok := node.(*ast.Code); ok {
+		lang := string("go")
+		applyHighlighting(w, app.htmlInlineFormatter, app.highlightStyle, string(code.Literal), lang, app.defaultLang)
 		return ast.GoToNext, true
 	}
+
+	if codeBlock, ok := node.(*ast.CodeBlock); ok {
+		lang := string(codeBlock.Info)
+		applyHighlighting(w, app.htmlBlockFormatter, app.highlightStyle, string(codeBlock.Literal), lang, app.defaultLang)
+		return ast.GoToNext, true
+	}
+
 	return ast.GoToNext, false
 }
 
-func renderCode(w io.Writer, codeBlock *ast.CodeBlock, entering bool) {
-	defaultLang := "go"
-	lang := string(codeBlock.Info)
-	applyHighlighting(w, string(codeBlock.Literal), lang, defaultLang)
-}
-
-func applyHighlighting(w io.Writer, source, lang, defaultLang string) error {
+func applyHighlighting(w io.Writer, formatter chroma.Formatter, highlightStyle *chroma.Style, source, lang, defaultLang string) error {
 	if lang == "" {
 		lang = defaultLang
 	}
@@ -127,5 +105,5 @@ func applyHighlighting(w io.Writer, source, lang, defaultLang string) error {
 	if err != nil {
 		return err
 	}
-	return htmlFormatter.Format(w, highlightStyle, it)
+	return formatter.Format(w, highlightStyle, it)
 }
