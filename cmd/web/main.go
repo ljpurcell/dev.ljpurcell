@@ -38,10 +38,12 @@ func main() {
 	staticDir := flag.String("staticDir", "./ui/static/", "HTTP network address")
 	flag.Parse()
 
+	// Logger
 	logger := slog.New(slog.NewTextHandler(os.Stdout, &slog.HandlerOptions{
 		AddSource: true,
 	}))
 
+	// Formatters for code blocks
 	htmlBlockFormatter := html.New(html.WithClasses(false), html.TabWidth(4))
 	if htmlBlockFormatter == nil {
 		logger.Error("Could not create html block formatter")
@@ -49,12 +51,12 @@ func main() {
 	}
 
 	htmlInlineFormatter := html.New(html.WithClasses(false), html.InlineCode(true))
-
 	if htmlInlineFormatter == nil {
 		logger.Error("Could not create html inline formatter")
 		os.Exit(1)
 	}
 
+	// Syntax highlighting
 	styleName := styles.GitHubDark.Name
 	highlightStyle := styles.Get(styleName)
 	if highlightStyle == nil {
@@ -70,26 +72,9 @@ func main() {
 		highlightStyle:      highlightStyle,
 	}
 
-	mux := http.NewServeMux()
-
-	// File server to serve static files
-	fileServer := http.FileServer(safeFileSystem{http.Dir(*staticDir)})
-	mux.Handle("GET /static", http.NotFoundHandler())
-	mux.Handle("GET /static/", http.StripPrefix("/static", fileServer))
-
-	// Application routes
-	mux.HandleFunc("GET /{$}", app.home)
-	mux.HandleFunc("GET /about", app.about)
-	mux.HandleFunc("GET /post/{slug}", app.post)
-	mux.HandleFunc("GET /posts", app.posts)
-	mux.HandleFunc("GET /projects", app.projects)
-
-	// TEST ROUTES
-	mux.HandleFunc("GET /test", app.testMdPost)
-
 	logger.Info("Starting server...", "addr", *addr)
 
-	err := http.ListenAndServe(*addr, mux)
+	err := http.ListenAndServe(*addr, app.routes(*staticDir))
 	logger.Error(err.Error())
 	os.Exit(1)
 }
