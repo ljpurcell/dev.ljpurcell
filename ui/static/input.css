@@ -8,7 +8,7 @@
   }
 
   pre {
-    @apply p-6 my-6;
+    @apply p-4 my-6;
   }
 
   p > code {
@@ -17,6 +17,10 @@
 
   p, div {
     @apply leading-relaxed;
+  }
+
+   p {
+    @apply py-6;
   }
 
   .theme {

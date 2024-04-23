@@ -599,7 +599,7 @@ a:hover {
 pre {
   margin-top: 1.5rem;
   margin-bottom: 1.5rem;
-  padding: 1.5rem;
+  padding: 1rem;
 }
 
 p > code {
@@ -609,6 +609,11 @@ p > code {
 
 p, div {
   line-height: 1.625;
+}
+
+p {
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
 }
 
 .theme {
@@ -646,12 +651,26 @@ p, div {
   margin: 2rem;
 }
 
+.mt-8 {
+  margin-top: 2rem;
+}
+
 .flex {
   display: flex;
 }
 
+.justify-center {
+  justify-content: center;
+}
+
 .justify-between {
   justify-content: space-between;
+}
+
+.space-x-20 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 0;
+  margin-right: calc(5rem * var(--tw-space-x-reverse));
+  margin-left: calc(5rem * calc(1 - var(--tw-space-x-reverse)));
 }
 
 .space-x-6 > :not([hidden]) ~ :not([hidden]) {
@@ -664,4 +683,8 @@ p, div {
   --tw-space-y-reverse: 0;
   margin-top: calc(2rem * calc(1 - var(--tw-space-y-reverse)));
   margin-bottom: calc(2rem * var(--tw-space-y-reverse));
+}
+
+.hover\:cursor-pointer:hover {
+  cursor: pointer;
 }
