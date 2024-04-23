@@ -1,9 +1,9 @@
 package main
 
 import (
-	"fmt"
 	"html/template"
 	"net/http"
+	"strings"
 )
 
 func (app *application) home(w http.ResponseWriter, r *http.Request) {
@@ -33,22 +33,17 @@ func (app *application) about(w http.ResponseWriter, r *http.Request) {
 func (app *application) post(w http.ResponseWriter, r *http.Request) {
 	slug := r.PathValue("slug")
 
-	// validate slug
+	// TODO: validate slug
+	pathBits := []string{
+		"./markdown/",
+		slug,
+		".md",
+	}
 
-	fmt.Fprintf(w, "Show a specific blog post at slug: %v", slug)
-}
+	path := strings.Join(pathBits, "")
 
-func (app *application) posts(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte("List all the blog posts..."))
-}
-
-func (app *application) projects(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte("List all my projects..."))
-}
-
-func (app *application) testMdPost(w http.ResponseWriter, r *http.Request) {
 	p := &Post{}
-	if err := app.parseFileIntoPost(p, "./markdown/test.md"); err != nil {
+	if err := app.parseFileIntoPost(p, path); err != nil {
 		/*
 		 * TODO: Check if file not found and return 404 if so
 		 */
@@ -74,4 +69,12 @@ func (app *application) testMdPost(w http.ResponseWriter, r *http.Request) {
 		app.serverError(w, r, err)
 		return
 	}
+}
+
+func (app *application) posts(w http.ResponseWriter, r *http.Request) {
+	w.Write([]byte("List all the blog posts..."))
+}
+
+func (app *application) projects(w http.ResponseWriter, r *http.Request) {
+	w.Write([]byte("List all my projects..."))
 }
