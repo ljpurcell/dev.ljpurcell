@@ -1,6 +1,7 @@
 package main
 
 import (
+	"errors"
 	"html/template"
 	"io"
 	"os"
@@ -18,6 +19,10 @@ import (
 func (app *application) parseFileIntoPost(p *Post, file string) error {
 	contents, err := os.ReadFile(file)
 	if err != nil {
+		if errors.Is(err, os.ErrNotExist) {
+			return ErrPostNotFound
+		}
+
 		return err
 	}
 

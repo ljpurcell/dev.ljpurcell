@@ -1,6 +1,7 @@
 package main
 
 import (
+	"errors"
 	"html/template"
 	"net/http"
 	"strings"
@@ -40,13 +41,17 @@ func (app *application) post(w http.ResponseWriter, r *http.Request) {
 		".md",
 	}
 
+	// TODO: implement cache
+
 	path := strings.Join(pathBits, "")
 
 	p := &Post{}
 	if err := app.parseFileIntoPost(p, path); err != nil {
-		/*
-		 * TODO: Check if file not found and return 404 if so
-		 */
+		if errors.Is(err, ErrPostNotFound) {
+			app.clientError(w, 404)
+			return
+		}
+
 		app.serverError(w, r, err)
 		return
 	}
