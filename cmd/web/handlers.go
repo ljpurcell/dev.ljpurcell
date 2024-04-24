@@ -1,9 +1,7 @@
 package main
 
 import (
-	"errors"
 	"net/http"
-	"strings"
 )
 
 func (app *application) home(w http.ResponseWriter, r *http.Request) {
@@ -17,25 +15,9 @@ func (app *application) about(w http.ResponseWriter, r *http.Request) {
 func (app *application) post(w http.ResponseWriter, r *http.Request) {
 	slug := r.PathValue("slug")
 
-	// TODO: validate slug
-	pathBits := []string{
-		"./markdown/",
-		slug,
-		".md",
-	}
-
-	// TODO: implement cache: cache[slug] => post
-
-	path := strings.Join(pathBits, "")
-
-	p := &Post{}
-	if err := app.parseFileIntoPost(p, path); err != nil {
-		if errors.Is(err, ErrPostNotFound) {
-			app.clientError(w, 404)
-			return
-		}
-
-		app.serverError(w, r, err)
+	p, ok := app.postCache[slug]
+	if !ok {
+		app.clientError(w, 404)
 		return
 	}
 
