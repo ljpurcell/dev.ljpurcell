@@ -2,29 +2,12 @@ package main
 
 import (
 	"errors"
-	"html/template"
 	"net/http"
 	"strings"
 )
 
 func (app *application) home(w http.ResponseWriter, r *http.Request) {
-	files := []string{
-		"./ui/html/base.tmpl.html",
-		"./ui/html/pages/home.tmpl.html",
-		"./ui/html/partials/nav.tmpl.html",
-	}
-
-	ts, err := template.ParseFiles(files...)
-	if err != nil {
-		app.serverError(w, r, err)
-		return
-	}
-
-	err = ts.ExecuteTemplate(w, "base", nil)
-	if err != nil {
-		app.serverError(w, r, err)
-		return
-	}
+	app.render(w, r, http.StatusOK, "home.tmpl.html", templateData{})
 }
 
 func (app *application) about(w http.ResponseWriter, r *http.Request) {
@@ -41,7 +24,7 @@ func (app *application) post(w http.ResponseWriter, r *http.Request) {
 		".md",
 	}
 
-	// TODO: implement cache
+	// TODO: implement cache: cache[slug] => post
 
 	path := strings.Join(pathBits, "")
 
@@ -56,30 +39,17 @@ func (app *application) post(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	files := []string{
-		"./ui/html/base.tmpl.html",
-		"./ui/html/partials/nav.tmpl.html",
-		"./ui/html/pages/post.tmpl.html",
-	}
-
-	ts, err := template.ParseFiles(files...)
-	if err != nil {
-		app.serverError(w, r, err)
-		return
-	}
-
 	w.Header().Set("Content-Type", "text/html; charset=utf-8")
-	err = ts.ExecuteTemplate(w, "base", p)
-	if err != nil {
-		app.serverError(w, r, err)
-		return
-	}
+
+	app.render(w, r, http.StatusOK, "post.tmpl.html", templateData{
+		Post: *p,
+	})
 }
 
 func (app *application) posts(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte("List all the blog posts..."))
+	app.render(w, r, http.StatusOK, "posts.tmpl.html", templateData{})
 }
 
 func (app *application) projects(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte("List all my projects..."))
+	app.render(w, r, http.StatusOK, "projects.tmpl.html", templateData{})
 }

@@ -22,6 +22,12 @@ type application struct {
 	htmlBlockFormatter  *html.Formatter
 	htmlInlineFormatter *html.Formatter
 	highlightStyle      *chroma.Style
+
+	templateCache map[string]*template.Template
+}
+
+type templateData struct {
+	Post Post
 }
 
 type Post struct {
@@ -64,17 +70,24 @@ func main() {
 		os.Exit(1)
 	}
 
+	templateCache, err := newTemplateCache()
+	if err != nil {
+		logger.Error(fmt.Sprintf("Could not create template cache: %v", err))
+		os.Exit(1)
+	}
+
 	app := &application{
 		defaultLang:         "go",
 		logger:              logger,
 		htmlBlockFormatter:  htmlBlockFormatter,
 		htmlInlineFormatter: htmlInlineFormatter,
 		highlightStyle:      highlightStyle,
+		templateCache:       templateCache,
 	}
 
 	logger.Info("Starting server...", "addr", *addr)
 
-	err := http.ListenAndServe(*addr, app.routes(*staticDir))
+	err = http.ListenAndServe(*addr, app.routes(*staticDir))
 	logger.Error(err.Error())
 	os.Exit(1)
 }
