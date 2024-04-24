@@ -23,6 +23,7 @@ type application struct {
 	htmlInlineFormatter *html.Formatter
 	highlightStyle      *chroma.Style
 
+	postCache     map[string]*Post
 	templateCache map[string]*template.Template
 }
 
@@ -84,6 +85,14 @@ func main() {
 		highlightStyle:      highlightStyle,
 		templateCache:       templateCache,
 	}
+
+	postCache, err := app.newPostCache()
+	if err != nil {
+		logger.Error(fmt.Sprintf("Could not create post cache: %v", err))
+		os.Exit(1)
+	}
+
+	app.postCache = postCache
 
 	logger.Info("Starting server...", "addr", *addr)
 
