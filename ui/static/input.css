@@ -23,8 +23,13 @@
     @apply list-decimal;
   }
 
+/* Needs work here, other A tag is good. Maybe internal links purple and external green*/
+  main > div > a {
+    @apply text-purple-300 font-bold hover:decoration-purple-400 hover:text-purple-400;
+  }
+
   a {
-    @apply hover:underline decoration-purple-400;
+    @apply hover:underline hover:decoration-purple-400;
   }
 
   pre {
@@ -51,11 +56,7 @@
     @apply mx-auto max-w-3xl 2xl:max-w-4xl;
   }
 
-  .emphasize-most {
-    @apply text-cyan-300 font-extrabold;
-  }
-
   .emphasize {
-    @apply text-zinc-400 font-bold;
+    @apply text-cyan-300 font-extrabold;
   }
 }

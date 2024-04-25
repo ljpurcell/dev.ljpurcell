@@ -639,12 +639,23 @@ ol {
   list-style-type: decimal;
 }
 
-a {
+/* Needs work here, other A tag is good. Maybe internal links purple and external green*/
+
+main > div > a {
+  font-weight: 700;
+  --tw-text-opacity: 1;
+  color: rgb(216 180 254 / var(--tw-text-opacity));
+}
+
+main > div > a:hover {
+  --tw-text-opacity: 1;
+  color: rgb(192 132 252 / var(--tw-text-opacity));
   text-decoration-color: #c084fc;
 }
 
 a:hover {
   text-decoration-line: underline;
+  text-decoration-color: #c084fc;
 }
 
 pre {
@@ -686,16 +697,10 @@ p {
   }
 }
 
-.emphasize-most {
+.emphasize {
   font-weight: 800;
   --tw-text-opacity: 1;
   color: rgb(103 232 249 / var(--tw-text-opacity));
-}
-
-.emphasize {
-  font-weight: 700;
-  --tw-text-opacity: 1;
-  color: rgb(161 161 170 / var(--tw-text-opacity));
 }
 
 .static {
