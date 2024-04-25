@@ -1,0 +1,28 @@
+{{define "title"}} Prdy {{end}}
+
+
+{{define "main"}}
+<h1 id="prdy">prdy</h1>
+<p>A command line tool to do the things a developer can forget before submitting a pull request. Prdy scans for
+    specified keywords, often related to debugging or temporary code (like <code>console.log</code> or
+    <code>var_dump</code>) and highlight any occurrences. It also provides functionalities for managing configuration
+    settings to tailor the search according to user-specific requirements, or to automatically run the test suite after
+    scanning.</p>
+<h2 id="purpose">Purpose</h2>
+<ol>
+    <li>Quality of life application to improve the work I do, even if only by a few percent</li>
+    <li>Increase comfort with core features of Go language and experiment with application structure</li>
+</ol>
+<h2 id="built-using">Built using</h2>
+<ul>
+    <li>Go standard library</li>
+    <li><a href="github.com/sabhiram/go-git-ignore">go-git-ignore</a> package to enhance configuration</li>
+</ul>
+<h2 id="technical-features">Technical features</h2>
+<ul>
+    <li>File system interaction</li>
+    <li>Configuration management</li>
+    <li>Code scanning and pattern matching</li>
+</ul>
+
+{{end}}

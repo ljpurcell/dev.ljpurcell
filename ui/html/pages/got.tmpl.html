@@ -1,0 +1,54 @@
+{{define "title"}}Got{{end}}
+
+{{define "main"}}
+<div>
+    <h1 id="got">GOT</h1>
+    <p>Like Git, but in Go.</p>
+    <p>Got is a command-line application developed in Go, functioning as a basic version control system similar to Git.
+        It allows users to perform essential operations like initializing repositories, staging changes, committing
+        snapshots, and checking out versions, leveraging Go’s robust file handling and command-line utilities.</p>
+    <h2 id="purpose">Purpose</h2>
+    <ol>
+        <li>Develop a deeper understanding of how Git works</li>
+        <li>
+            <p>Build proficiency with Go, particularly working with files</p>
+            <h2 id="version-control-operations">Version control operations</h2>
+            <ul>
+                <li>
+                    <p><strong>Repository Initialization (<code>init</code> command):</strong> Sets up a new repository
+                        by creating necessary directory structures and initializing a HEAD file, which tracks the
+                        current branch.</p>
+                </li>
+                <li>
+                    <p><strong>Staging Changes (<code>add</code> and <code>remove</code> commands):</strong> Manages the
+                        staging area, where changes are prepped for commits. Involves updating the index with file
+                        statuses.</p>
+                </li>
+                <li>
+                    <p><strong>Committing Changes (<code>commit</code> command):</strong> Takes a snapshot of the staged
+                        changes, creating a commit object that includes metadata like the commit message and parent
+                        commit. When committed, files are compressed (using zlib) and this snapshot can be identified by
+                        the resulting SHA-1 hash.</p>
+                </li>
+                <li>
+                    <p><strong>Checkout Feature (<code>checkout</code> command):</strong> Allows users to revert their
+                        working directory to the state of a specific commit, identified by its hash.</p>
+                </li>
+            </ul>
+        </li>
+    </ol>
+    <h2 id="built-using">Built using</h2>
+    <ul>
+        <li>The Go standard library</li>
+    </ul>
+    <h2 id="technical-features">Technical features</h2>
+    <ul>
+        <li>File handling</li>
+        <li>Compression and decompression</li>
+        <li>Hashing</li>
+        <li>Unit testing</li>
+        <li>Custom data structures</li>
+    </ul>
+
+</div>
+{{end}}

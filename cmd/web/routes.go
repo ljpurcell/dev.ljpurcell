@@ -16,6 +16,7 @@ func (app *application) routes(staticDir string) *http.ServeMux {
 	mux.HandleFunc("GET /about", app.about)
 	mux.HandleFunc("GET /post/{slug}", app.post)
 	mux.HandleFunc("GET /posts", app.posts)
+	mux.HandleFunc("GET /project/{project}", app.project)
 	mux.HandleFunc("GET /projects", app.projects)
 
 	return mux

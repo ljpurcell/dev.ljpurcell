@@ -19,3 +19,9 @@
 
 # Go workspace file
 go.work
+
+# Mac stuff
+*.DS_Store
+
+# Dummy MD data
+test*md
