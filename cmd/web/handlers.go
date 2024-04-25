@@ -32,6 +32,33 @@ func (app *application) posts(w http.ResponseWriter, r *http.Request) {
 	app.render(w, r, http.StatusOK, "posts.tmpl.html", templateData{})
 }
 
+func (app *application) project(w http.ResponseWriter, r *http.Request) {
+	project := r.PathValue("project")
+
+	var status int = http.StatusOK
+	var page string
+
+	switch project {
+	case "portfolio":
+		page = "portfolio.tmpl.html"
+	case "sharks":
+		page = "sharks.tmpl.html"
+	case "tragics":
+		page = "tragics.tmpl.html"
+	case "prdy":
+		page = "prdy.tmpl.html"
+	case "got":
+		page = "got.tmpl.html"
+	case "fraudible":
+		page = "fraudible.tmpl.html"
+	default:
+		status = http.StatusNotFound
+		page = "not-found.tmpl.html" // TODO: Create page for 404 and 500
+	}
+
+	app.render(w, r, status, page, templateData{})
+}
+
 func (app *application) projects(w http.ResponseWriter, r *http.Request) {
 	app.render(w, r, http.StatusOK, "projects.tmpl.html", templateData{})
 }
