@@ -28,14 +28,15 @@ type application struct {
 }
 
 type templateData struct {
-	Post Post
+	Post  Post
+	Posts map[string]*Post
 }
 
 type Post struct {
-	Title     string
-	Slug      string
-	Catergory string
-	Content   template.HTML
+	Title    string
+	Slug     string
+	Category string
+	Content  template.HTML
 }
 
 func main() {

@@ -51,7 +51,7 @@ func (app *application) parseFileIntoPost(p *Post, file string) error {
 
 	p.Title = metaMap["title"]
 	p.Slug = metaMap["slug"]
-	p.Catergory = metaMap["catergory"]
+	p.Category = metaMap["catergory"]
 
 	html := app.mdToHTML([]byte(mu))
 	p.Content = template.HTML(html)
