@@ -29,7 +29,9 @@ func (app *application) post(w http.ResponseWriter, r *http.Request) {
 }
 
 func (app *application) posts(w http.ResponseWriter, r *http.Request) {
-	app.render(w, r, http.StatusOK, "posts.tmpl.html", templateData{})
+	app.render(w, r, http.StatusOK, "posts.tmpl.html", templateData{
+		Posts: app.postCache,
+	})
 }
 
 func (app *application) project(w http.ResponseWriter, r *http.Request) {

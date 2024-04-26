@@ -1,0 +1,14 @@
+{{define "title"}}Posts{{end}}
+
+{{define "main"}}
+<h1>Posts</h1>
+{{if .Posts }}
+{{range .Posts}}
+<div>
+    <a href="/post/{{.Slug}}">{{.Title}}</a>
+</div>
+{{end}}
+{{else}}
+<p>Nothing to see here yet...</p>
+{{end}}
+{{end}}
