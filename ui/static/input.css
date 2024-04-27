@@ -4,17 +4,20 @@
 
 @layer components {
 
+  
+/* Headings */
  h1 {
-    @apply text-3xl lg:text-6xl font-black;
+    @apply text-3xl lg:text-6xl font-black mt-16 mb-10;
   }
   h2 {
-    @apply text-2xl lg:text-4xl font-bold mt-12 mb-6;
+    @apply text-2xl lg:text-4xl font-bold mt-16 mb-4 text-green-300;
   }
   h3 {
-    @apply text-xl lg:text-2xl font-bold mt-4 mb-2;
+    @apply text-xl lg:text-2xl font-bold mt-8 mb-2;
   }
 
 
+/* Lists */
   ul {
     @apply list-disc;
   }
@@ -23,15 +26,26 @@
     @apply list-decimal;
   }
 
-/* Needs work here, other A tag is good. Maybe internal links purple and external green*/
-  main > div > a {
+   ol, ul {
+    @apply my-6 pl-6;
+  }
+
+  li {
+    @apply pb-1;
+  }
+
+/* Links */
+  /* In text */
+  main > p > a {
     @apply text-purple-300 font-bold hover:decoration-purple-400 hover:text-purple-400;
   }
 
+  /* Navigation */
   a {
     @apply hover:underline hover:decoration-purple-400;
   }
 
+/* Code */ 
   pre {
     @apply p-4 my-6;
   }
@@ -40,12 +54,10 @@
     @apply p-1 rounded;
   }
 
-  p, div {
-    @apply leading-relaxed;
-  }
 
-   p {
-    @apply py-6;
+/* Theme */
+  p, div {
+    @apply mt-4 mb-8 leading-relaxed;
   }
 
   .theme {
