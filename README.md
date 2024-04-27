@@ -9,7 +9,7 @@ Site for development related things, such as projects and blog posts.
 
 ## Built using
 - Go standard library
-- [gomarkdown/markdown](https://github.com/gomarkdown/markdown) render blog posts
+- [gomarkdown/markdown](https://github.com/gomarkdown/markdown) to render blog posts
 - [chroma](https://github.com/alecthomas/chroma) for syntax highlighting
 - TailwindCSS
 
