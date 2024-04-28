@@ -19,5 +19,5 @@ func (app *application) routes(staticDir string) http.Handler {
 	mux.HandleFunc("GET /project/{project}", app.project)
 	mux.HandleFunc("GET /projects", app.projects)
 
-	return attachCommonHeaders(mux)
+	return app.commonHeaders(mux)
 }

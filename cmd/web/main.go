@@ -28,6 +28,7 @@ type application struct {
 }
 
 type templateData struct {
+	Nonce string
 	Post  Post
 	Posts map[string]*Post
 }
@@ -38,6 +39,10 @@ type Post struct {
 	Category string
 	Content  template.HTML
 }
+
+type contextKey string
+
+const nonceKey contextKey = "nonce"
 
 func main() {
 
@@ -97,7 +102,13 @@ func main() {
 
 	logger.Info("Starting server...", "addr", *addr)
 
-	err = http.ListenAndServe(*addr, app.routes(*staticDir))
+	server := &http.Server{
+		Addr:     *addr,
+		Handler:  app.routes(*staticDir),
+		ErrorLog: slog.NewLogLogger(logger.Handler(), slog.LevelError),
+	}
+
+	err = server.ListenAndServe()
 	logger.Error(err.Error())
 	os.Exit(1)
 }
