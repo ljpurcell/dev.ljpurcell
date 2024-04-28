@@ -3,24 +3,25 @@
 {{define "main"}}
 <h1>About</h1>
 <p>Hi, I&#39;m Lyndon. </p>
-<p>I’m a software engineer with a keen interest in backend technologies, and a particular fondness for Go. I am
-    analytical, love problem-solving, and enjoy thinking about systems and scale. My career has been non-linear, and
-    includes roles such as strength coach, data analyst, and service coordinator for mental health services. This broad
+<p>I’m a software engineer with a keen interest in backend technologies, and a particular fondness for Go. I love
+    solving problems and thinking about systems. My career has been non-linear, and
+    includes roles such as strength coach, data analyst, and mental health service coordinator. This broad
     range of experience has been invaluable for my development.</p>
 <h2 id="technical-interests">Technical Interests</h2>
 <h3>Go</h3>
 <p>When programming, I&#39;m having the most fun (and doing my best work) when using a statically-typed, lower-level
-    language. My introduction to programming was C, and that essence has always stayed with me.
+    language. My introduction to programming was C.
     I&#39;m drawn to Go as it allows me to handle the lower-level operations that I find most interesting about
     programming, whilst being remarkably productive, performant, and does not abuse abstraction. My goal is to become
     <em>a wizard</em> at Go.
 </p>
 <h3>Data Structures &amp; Algorithms</h3>
-<p>I’m drawn to data structures and algorithms because they are the bedrock upon which efficient software is built. All
-    other things being equal, faster software, that uses less resources, is better. Many modern technologies try to
+<p>I’m drawn to data structures and algorithms because they are the bedrock of efficient software. Faster software, that
+    uses less resources, <em>is better</em>. Many modern technologies try to
     prevent programmers from needing to think about memory within the computer, or how costly it will be to add an
-    element collection; but I think these are important. A developer can still make tremendous progress on what they are
-    building while taking even just <em>some</em> care along the way to make sure their solution is efficient.</p>
+    element to a collection; but I think this is important. A developer can still make tremendous progress on what they
+    are
+    building while taking care along the way to make sure their solution is efficient.</p>
 <h2 id="me-the-person">Me, The Person</h2>
 <h3>Life Philosphy</h3>
 <p>I strive to understand the world more deeply as well as make it a better place. I&#39;m committed to ongoing
@@ -49,8 +50,8 @@
     <li><a href="https://github.com/ljpurcell" target="_blank">GitHub - ljpurcell</a></li>
     <li><a href="https://www.linkedin.com/in/ljpurcell" target="_blank">LinkedIn - Lyndon Purcell</a></li>
     <li><a href="mailto:ljpurcell.dev@gmail.com">Email - ljpurcell[dot]dev[at]gmail[dot]com</a><svg id="email-clipboard"
-            height="16" class="ml-2 inline hover:cursor-pointer" onclick="copyEmail()"
-            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
+            height="16" class="ml-2 inline hover:cursor-pointer" xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 384 512">
             <title>Copy email to clipboard</title>
             <path fill="#A1A1AA"
                 d="M280 64h40c35.3 0 64 28.7 64 64V448c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V128C0 92.7 28.7 64 64 64h40 9.6C121 27.5 153.3 0 192 0s71 27.5 78.4 64H280zM64 112c-8.8 0-16 7.2-16 16V448c0 8.8 7.2 16 16 16H320c8.8 0 16-7.2 16-16V128c0-8.8-7.2-16-16-16H304v24c0 13.3-10.7 24-24 24H192 104c-13.3 0-24-10.7-24-24V112H64zm128-8a24 24 0 1 0 0-48 24 24 0 1 0 0 48z" />
@@ -59,25 +60,5 @@
     </li>
 </ul>
 
-<script>
-    function copyEmail() {
-
-        navigator.clipboard.writeText("ljpurcell.dev@gmail.com");
-
-        const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
-        path.setAttribute("fill", "#A1A1AA");
-        path.setAttribute("d", "M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z");
-
-        const tick = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-        tick.setAttribute("id", "email-tick");
-        tick.setAttribute("class", "ml-2 inline");
-        tick.setAttribute("viewBox", "0 0 448 512");
-        tick.setAttribute("height", 16);
-
-        tick.appendChild(path);
-
-        const clipboard = document.getElementById("email-clipboard");
-        clipboard.replaceWith(tick);
-    }
-</script>
+<script nonce="{{.Nonce}}" src="/static/script.js"></script>
 {{end}}

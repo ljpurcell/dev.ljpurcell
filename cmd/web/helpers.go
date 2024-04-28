@@ -1,6 +1,9 @@
 package main
 
 import (
+	"bytes"
+	"crypto/rand"
+	"encoding/base64"
 	"fmt"
 	"net/http"
 )
@@ -27,8 +30,22 @@ func (app *application) render(w http.ResponseWriter, r *http.Request, status in
 
 	w.WriteHeader(status)
 
-	err := ts.ExecuteTemplate(w, "base", data)
+	var buf bytes.Buffer
+
+	err := ts.ExecuteTemplate(&buf, "base", data)
 	if err != nil {
 		app.serverError(w, r, err)
 	}
+
+	buf.WriteTo(w)
+}
+
+func (app *application) generateNonce() (string, error) {
+	nonce := make([]byte, 16)
+	if _, err := rand.Read(nonce); err != nil {
+		err = fmt.Errorf("Could not create nonce: %w", err)
+		app.logger.Error(err.Error())
+		return "", err
+	}
+	return base64.StdEncoding.EncodeToString(nonce), nil
 }
