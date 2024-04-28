@@ -1,16 +1,20 @@
 package main
 
 import (
+	"crypto/tls"
 	"flag"
 	"fmt"
 	"html/template"
+	"log"
 	"log/slog"
 	"net/http"
 	"os"
+	"time"
 
 	"github.com/alecthomas/chroma/v2"
 	"github.com/alecthomas/chroma/v2/formatters/html"
 	"github.com/alecthomas/chroma/v2/styles"
+	"golang.org/x/crypto/acme/autocert"
 )
 
 // To hold application dependencies, enabling dependency injection
@@ -44,11 +48,24 @@ type contextKey string
 
 const nonceKey contextKey = "nonce"
 
+func newHttpServer(addr string, handler http.Handler, logger *log.Logger) *http.Server {
+	return &http.Server{
+		Addr:         addr,
+		Handler:      handler,
+		ErrorLog:     logger,
+		ReadTimeout:  5 * time.Second,
+		WriteTimeout: 5 * time.Second,
+		IdleTimeout:  120 * time.Second,
+	}
+
+}
+
 func main() {
 
 	// Configuration
 	addr := flag.String("addr", ":8080", "HTTP network address")
 	staticDir := flag.String("staticDir", "./ui/static/", "HTTP network address")
+	inProduction := flag.Bool("in-production", false, "Is the app runnning in a production environment")
 	flag.Parse()
 
 	// Logger
@@ -100,15 +117,45 @@ func main() {
 
 	app.postCache = postCache
 
-	logger.Info("Starting server...", "addr", *addr)
+	server := newHttpServer(
+		*addr,
+		app.routes(*staticDir),
+		slog.NewLogLogger(logger.Handler(), slog.LevelError),
+	)
 
-	server := &http.Server{
-		Addr:     *addr,
-		Handler:  app.routes(*staticDir),
-		ErrorLog: slog.NewLogLogger(logger.Handler(), slog.LevelError),
+	if *inProduction {
+		certMan := &autocert.Manager{
+			Prompt:     autocert.AcceptTOS,
+			Cache:      autocert.DirCache("tls"),
+			HostPolicy: autocert.HostWhitelist("ljpurcell.com", "www.ljpurcell.com"),
+		}
+
+		server.TLSConfig = &tls.Config{
+			GetCertificate: certMan.GetCertificate,
+			NextProtos:     []string{"http/1.1", "h2"},
+		}
+
+		logger.Info("Starting TLS server...", "addr", server.Addr)
+
+		go func() {
+			err = server.ListenAndServeTLS("", "")
+			logger.Error(err.Error())
+			logger.Error(err.Error())
+			os.Exit(1)
+		}()
+
+		const httpPort = ":80"
+		logger.Info("Starting HTTP redirect server...", "addr", httpPort)
+
+		err = http.ListenAndServe(httpPort, certMan.HTTPHandler(nil))
+		logger.Error(err.Error())
+		os.Exit(1)
+	} else {
+
+		logger.Info("Starting HTTP server...", "addr", server.Addr)
+
+		err = server.ListenAndServe()
+		logger.Error(err.Error())
+		os.Exit(1)
 	}
-
-	err = server.ListenAndServe()
-	logger.Error(err.Error())
-	os.Exit(1)
 }
