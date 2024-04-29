@@ -2,4 +2,4 @@ package main
 
 import "fmt"
 
-var ErrPostNotFound = fmt.Errorf("Could not find post based on slug")
+var ErrPostNotFound = fmt.Errorf("could not find post based on slug")

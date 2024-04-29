@@ -25,3 +25,4 @@ go.work
 
 # Dummy MD data
 test*md
+.env
