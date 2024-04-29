@@ -87,7 +87,7 @@ func main() {
 	}
 
 	// Syntax highlighting
-	styleName := styles.GitHubDark.Name
+	styleName := "github-dark"
 	highlightStyle := styles.Get(styleName)
 	if highlightStyle == nil {
 		logger.Error(fmt.Sprintf("Could not find style %s", styleName))
@@ -139,7 +139,6 @@ func main() {
 
 		go func() {
 			err = server.ListenAndServeTLS("", "")
-			logger.Error(err.Error())
 			logger.Error(err.Error())
 			os.Exit(1)
 		}()

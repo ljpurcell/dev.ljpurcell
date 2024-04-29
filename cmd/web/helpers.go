@@ -23,7 +23,7 @@ func (app *application) clientError(w http.ResponseWriter, status int) {
 func (app *application) render(w http.ResponseWriter, r *http.Request, status int, page string, data templateData) {
 	ts, ok := app.templateCache[page]
 	if !ok {
-		err := fmt.Errorf("Template %q does not exist", page)
+		err := fmt.Errorf("template %q does not exist", page)
 		app.serverError(w, r, err)
 		return
 	}
@@ -43,7 +43,7 @@ func (app *application) render(w http.ResponseWriter, r *http.Request, status in
 func (app *application) generateNonce() (string, error) {
 	nonce := make([]byte, 16)
 	if _, err := rand.Read(nonce); err != nil {
-		err = fmt.Errorf("Could not create nonce: %w", err)
+		err = fmt.Errorf("could not create nonce: %w", err)
 		app.logger.Error(err.Error())
 		return "", err
 	}
