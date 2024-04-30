@@ -14,6 +14,7 @@ import (
 	"github.com/alecthomas/chroma/v2"
 	"github.com/alecthomas/chroma/v2/formatters/html"
 	"github.com/alecthomas/chroma/v2/styles"
+	"github.com/ljpurcell/dev.ljpurcell/internal/vcs"
 	"golang.org/x/crypto/acme/autocert"
 )
 
@@ -48,6 +49,8 @@ type contextKey string
 
 const nonceKey contextKey = "nonce"
 
+var version string = vcs.Version()
+
 func newHttpServer(addr string, handler http.Handler, logger *log.Logger) *http.Server {
 	return &http.Server{
 		Addr:         addr,
@@ -62,11 +65,19 @@ func newHttpServer(addr string, handler http.Handler, logger *log.Logger) *http.
 
 func main() {
 
+	displayVersion := flag.Bool("version", false, "Display version and exit")
+
 	// Configuration
 	addr := flag.String("addr", ":8080", "HTTP network address")
 	staticDir := flag.String("staticDir", "./ui/static/", "HTTP network address")
 	inProduction := flag.Bool("in-production", false, "Is the app runnning in a production environment")
+
 	flag.Parse()
+
+	if *displayVersion {
+		fmt.Printf("Version:\t%s\n", version)
+		os.Exit(0)
+	}
 
 	// Logger
 	logger := slog.New(slog.NewTextHandler(os.Stdout, &slog.HandlerOptions{
@@ -131,8 +142,14 @@ func main() {
 		}
 
 		server.TLSConfig = &tls.Config{
-			GetCertificate: certMan.GetCertificate,
-			NextProtos:     []string{"http/1.1", "h2"},
+			GetCertificate: func(info *tls.ClientHelloInfo) (*tls.Certificate, error) {
+				cert, err := certMan.GetCertificate(info)
+				if err != nil {
+					logger.Error("Failed to get TLS certificate", "error", err)
+				}
+				return cert, err
+			},
+			NextProtos: []string{"http/1.1", "h2"},
 		}
 
 		logger.Info("Starting TLS server...", "addr", server.Addr)
