@@ -1,0 +1,33 @@
+[Unit]
+
+Description=Portfolio site running on for Lyndon Purcell
+
+# Wait until the network is up before starting the service
+After=network-online.target 
+Wants=network-online.target
+
+# Configure service start rate limiting. If the service is (re)started more than 5 times 
+# in 600 seconds then don't permit it to start anymore.
+StartLimitIntervalSec=600
+StartLimitBurst=5
+
+[Service]
+AmbientCapabilities=CAP_NET_BIND_SERVICE
+Type=exec
+User=ljpurcell
+Group=ljpurcell
+EnvironmentFile=/etc/environment
+WorkingDirectory=/home/ljpurcell
+ExecStart=/home/ljpurcell/web -addr=":443" -in-production
+ProtectSystem=full
+PrivateTmp=true
+NoNewPrivileges=true
+
+# Automatically restart the service after a 5-second wait if it exits with a non-zero exit code
+Restart=on-failure
+RestartSec=5
+
+[Install]
+# Start the service automatically at boot time
+WantedBy=multi-user.target
+

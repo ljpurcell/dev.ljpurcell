@@ -46,9 +46,20 @@ production/connect:
 ## production/deploy/app: deploy the app to production using the server specific binary
 .PHONY: production/deploy/app
 production/deploy/app: confirm
+	@echo 'Minifying CSS...'
+	npx tailwindcss -i ./ui/static/input.css -o ./ui/static/style.css --minify
+	@echo 'Minifying JS...'
+	terser ./ui/static/input.js -o ./ui/static/script.js --compress --mangle
 	rsync -P ./bin/linux_amd64/web ${production_non_root_user}@${production_host_ip}:~
-	rsync -P ./ui -r --delete ${production_non_root_user}@${production_host_ip}:~
-	@echo "> Don't forget to run 'sudo setcap 'cap_net_bind_service=+ep' ./web' on the server!"
+	rsync -P ./ui -r --delete --exclude "./ui/static/input.*" ${production_non_root_user}@${production_host_ip}:~
+	rsync -P ./remote/production/web.service ${production_non_root_user}@${production_host_ip}:~
+	ssh -t ${production_non_root_user}@${production_host_ip} '\
+	sudo mv ~/web.service /etc/systemd/system/ \
+		&& sudo setcap 'cap_net_bind_service=+ep' ~/web \
+		&& sudo systemctl daemon-reload \
+		&& sudo systemctl enable web \
+		&& sudo systemctl restart web \
+		'
 
 
 # ==================================================================================== #
