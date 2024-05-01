@@ -1,18 +1,16 @@
 /** @type {import('tailwindcss').Config} */
-module.exports = {
-  content: ["./ui/**/*.{html,js}"],
-  theme: {
-    extend: {
-      fontFamily: {
-          sans: ["Iosevka Aile Iaso", "sans-serif"],
-          mono: ["Iosevka Curly Iaso", "monospace"],
-          serif: ["Iosevka Etoile Iaso", "serif"],
-      },
+export const content = ["./ui/**/*.{html,js}"];
+export const theme = {
+  extend: {
+    fontFamily: {
+      sans: ["Iosevka Aile Iaso", "sans-serif"],
+      mono: ["Iosevka Curly Iaso", "monospace"],
+      serif: ["Iosevka Etoile Iaso", "serif"],
     },
   },
-  plugins: [
-    require('tailwindcss'),
-    require('autoprefixer'),
-  ],
-}
+};
+export const plugins = [
+  require('tailwindcss'),
+  require('autoprefixer'),
+];
 

@@ -85,23 +85,23 @@ func main() {
 	}))
 
 	// Formatters for code blocks
-	htmlBlockFormatter := html.New(html.WithClasses(false), html.TabWidth(4))
+	// Class definitions for style in ./ui/static/chroma.css
+	htmlBlockFormatter := html.New(html.WithClasses(true), html.TabWidth(4))
 	if htmlBlockFormatter == nil {
 		logger.Error("Could not create html block formatter")
 		os.Exit(1)
 	}
 
-	htmlInlineFormatter := html.New(html.WithClasses(false), html.InlineCode(true))
+	htmlInlineFormatter := html.New(html.WithClasses(true), html.InlineCode(true))
 	if htmlInlineFormatter == nil {
 		logger.Error("Could not create html inline formatter")
 		os.Exit(1)
 	}
 
 	// Syntax highlighting
-	styleName := "github-dark"
-	highlightStyle := styles.Get(styleName)
+	highlightStyle := styles.Get("github-dark")
 	if highlightStyle == nil {
-		logger.Error(fmt.Sprintf("Could not find style %s", styleName))
+		logger.Error("Could not find style 'github-dark'")
 		os.Exit(1)
 	}
 

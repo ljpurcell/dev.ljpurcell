@@ -77,7 +77,6 @@ func (app *application) mdToHTML(md []byte) []byte {
  * Syntax highlighting
  */
 func (app *application) myRenderHook(w io.Writer, node ast.Node, entering bool) (ast.WalkStatus, bool) {
-	// TODO: work out how to style inline code
 	if code, ok := node.(*ast.Code); ok {
 		lang := string("go")
 		applyHighlighting(w, app.htmlInlineFormatter, app.highlightStyle, string(code.Literal), lang, app.defaultLang)

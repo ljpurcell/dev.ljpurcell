@@ -18,7 +18,7 @@ func (app *application) commonHeaders(next http.Handler) http.HandlerFunc {
 
 		ctx := context.WithValue(r.Context(), nonceKey, nonce)
 
-		csp := fmt.Sprintf("default-src 'self'; style-src 'self' cdn.xeiaso.net; font-src 'self' data:; script-src 'self' 'nonce-%s'", nonce)
+		csp := fmt.Sprintf("default-src 'self'; style-src 'self' fonts.googleapis.com; font-src 'self' fonts.gstatic.com data:; script-src 'self' 'nonce-%s'", nonce)
 
 		w.Header().Set("Content-Security-Policy", csp)
 		w.Header().Set("Referrer-Policy", "origin-when-cross-origin")

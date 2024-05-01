@@ -7,14 +7,30 @@
   
 /* Headings */
  h1 {
-    @apply text-3xl lg:text-6xl font-black mt-16 mb-10;
+    @apply text-2xl md:text-3xl lg:text-6xl font-black mt-16 mb-10;
   }
   h2 {
-    @apply text-2xl lg:text-4xl font-bold mt-16 mb-4 text-green-300;
+    @apply text-xl md:text-2xl lg:text-4xl font-bold mt-16 mb-4 text-green-300;
   }
   h3 {
-    @apply text-xl lg:text-2xl font-bold mt-8 mb-2;
+    @apply text-lg md:text-xl lg:text-2xl font-bold mt-8 mb-2;
   }
+
+ .home > h1 {
+    @apply text-9xl md:text-8xl lg:text-5xl text-gray-300;
+  }
+  
+  .home > h2 {
+    @apply text-7xl md:text-6xl lg:text-4xl text-gray-300 font-bold;
+  }
+  
+  .home > h3 {
+    @apply text-5xl md:text-4xl lg:text-3xl text-gray-300 font-bold;
+  }
+
+pre, code {
+    font-family: 'Fira Code', monospace;
+}
 
 
 /* Lists */
@@ -47,28 +63,32 @@
 
 /* Code */ 
   pre {
-    @apply p-4 my-6;
+    @apply p-6 my-6;
   }
 
   p > code {
-    @apply p-1 rounded;
+    @apply p-1;
   }
 
 
 /* Theme */
   p, div {
-    @apply mt-4 mb-8 leading-relaxed;
+    @apply mt-4 mb-8 leading-loose;
   }
 
   .theme {
-    @apply bg-neutral-800 text-gray-300;
+    @apply text-xl lg:text-base bg-neutral-800 text-gray-300;
   }
 
   .container {
-    @apply mx-auto max-w-3xl 2xl:max-w-4xl;
+    @apply mx-auto px-4 lg:px-2 2xl:px-0 w-full max-w-4xl 2xl:max-w-6xl min-h-screen;
   }
 
   .emphasize {
     @apply text-cyan-300 font-extrabold;
+  }
+
+  .home {
+@apply text-2xl space-y-56 md:space-y-36 lg:space-y-16 lg:text-lg pt-6 lg:pt-0;
   }
 }
