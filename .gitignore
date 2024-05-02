@@ -27,3 +27,4 @@ go.work
 test*md
 .env
 bin/
+out/
