@@ -48,6 +48,10 @@ type Post struct {
 type contextKey string
 
 const nonceKey contextKey = "nonce"
+const encodingKey contextKey = "encoding"
+
+const brEncoding string = "br"
+const gzipEncoding string = "gzip"
 
 var version string = vcs.Version()
 
@@ -69,7 +73,7 @@ func main() {
 
 	// Configuration
 	addr := flag.String("addr", ":8080", "HTTP network address")
-	staticDir := flag.String("staticDir", "./ui/static/", "HTTP network address")
+	staticDir := flag.String("staticDir", "./ui/static/", "Directory of the static assets")
 	inProduction := flag.Bool("in-production", false, "Is the app runnning in a production environment")
 
 	flag.Parse()
