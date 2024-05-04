@@ -10,11 +10,7 @@ func (app *application) home(w http.ResponseWriter, r *http.Request) {
 
 func (app *application) about(w http.ResponseWriter, r *http.Request) {
 
-	nonce := r.Context().Value(nonceKey).(string)
-
-	app.render(w, r, http.StatusOK, "about.tmpl.html", templateData{
-		Nonce: nonce,
-	})
+	app.render(w, r, http.StatusOK, "about.tmpl.html", templateData{})
 }
 
 func (app *application) post(w http.ResponseWriter, r *http.Request) {
