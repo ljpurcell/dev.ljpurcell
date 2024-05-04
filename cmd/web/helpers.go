@@ -7,7 +7,6 @@ import (
 	"encoding/base64"
 	"fmt"
 	"net/http"
-	"strings"
 
 	"github.com/andybalholm/brotli"
 )
@@ -25,11 +24,19 @@ func (app *application) clientError(w http.ResponseWriter, status int) {
 }
 
 func (app *application) render(w http.ResponseWriter, r *http.Request, status int, page string, data templateData) {
+
 	ts, ok := app.templateCache[page]
 	if !ok {
 		err := fmt.Errorf("template %q does not exist", page)
 		app.serverError(w, r, err)
 		return
+	}
+
+	data.Nonce = r.Context().Value(nonceKey).(string)
+	encoding := r.Context().Value(encodingKey).(string)
+
+	if encoding == brEncoding || encoding == gzipEncoding {
+		data.EncodingExt = fmt.Sprintf(".%s", encoding)
 	}
 
 	var buf bytes.Buffer
@@ -41,12 +48,10 @@ func (app *application) render(w http.ResponseWriter, r *http.Request, status in
 	}
 
 	w.Header().Set("Content-Type", "text/html; charset=utf-8")
+	w.Header().Set("Vary", "Content-Encoding")
 
-	encodings := r.Header.Get("Accept-Encoding")
-
-	if strings.Contains(encodings, brEncoding) {
+	if encoding == brEncoding {
 		w.Header().Set("Content-Encoding", brEncoding)
-		w.Header().Set("Vary", "Content-Encoding")
 		w.WriteHeader(status)
 
 		bw := brotli.NewWriter(w)
@@ -54,9 +59,8 @@ func (app *application) render(w http.ResponseWriter, r *http.Request, status in
 
 		buf.WriteTo(bw)
 		return
-	} else if strings.Contains(encodings, gzipEncoding) {
+	} else if encoding == gzipEncoding {
 		w.Header().Set("Content-Encoding", gzipEncoding)
-		w.Header().Set("Vary", "Content-Encoding")
 		w.WriteHeader(status)
 
 		zw := gzip.NewWriter(w)

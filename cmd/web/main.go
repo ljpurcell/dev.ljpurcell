@@ -33,9 +33,10 @@ type application struct {
 }
 
 type templateData struct {
-	Nonce string
-	Post  Post
-	Posts map[string]*Post
+	EncodingExt string
+	Nonce       string
+	Post        Post
+	Posts       map[string]*Post
 }
 
 type Post struct {

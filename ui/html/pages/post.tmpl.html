@@ -4,6 +4,6 @@
 
 {{define "main"}}
 {{.Post.Content}}
-<link rel="stylesheet" href="/static/chroma.css" />
+<link rel="stylesheet" href="/static/chroma.css{{ .EncodingExt }}" />
 <link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet">
 {{end}}
