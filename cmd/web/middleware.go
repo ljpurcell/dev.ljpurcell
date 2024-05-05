@@ -24,12 +24,15 @@ func (app *application) commonHeaders(next http.Handler) http.HandlerFunc {
 
 		acceptedEncodings := r.Header.Get("Accept-Encoding")
 
-		if strings.Contains(acceptedEncodings, brEncoding) {
-			w.Header().Set("Content-Encoding", brEncoding)
-			ctx = context.WithValue(ctx, encodingKey, brEncoding)
-		} else if strings.Contains(acceptedEncodings, gzipEncoding) {
-			w.Header().Set("Content-Encoding", gzipEncoding)
-			ctx = context.WithValue(ctx, encodingKey, gzipEncoding)
+		// Images are not compressed, other static assets are
+		if !strings.Contains(r.URL.Path, "/img/") {
+			if strings.Contains(acceptedEncodings, brEncoding) {
+				w.Header().Set("Content-Encoding", brEncoding)
+				ctx = context.WithValue(ctx, encodingKey, brEncoding)
+			} else if strings.Contains(acceptedEncodings, gzipEncoding) {
+				w.Header().Set("Content-Encoding", gzipEncoding)
+				ctx = context.WithValue(ctx, encodingKey, gzipEncoding)
+			}
 		}
 
 		// Static files have a templateData field called EncodingExt that
@@ -39,6 +42,8 @@ func (app *application) commonHeaders(next http.Handler) http.HandlerFunc {
 			w.Header().Set("Content-Type", "application/javascript")
 		} else if strings.Contains(r.URL.Path, ".css") {
 			w.Header().Set("Content-Type", "text/css")
+		} else if strings.Contains(r.URL.Path, ".webp") {
+			w.Header().Set("Content-Type", "image/webp")
 		}
 
 		csp := fmt.Sprintf("default-src 'self'; style-src 'self' fonts.googleapis.com; font-src 'self' fonts.gstatic.com data:; script-src 'self' 'nonce-%s'", nonce)
