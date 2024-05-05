@@ -64,11 +64,19 @@ production/deploy/unoptimised-app: confirm
 ## production/deploy/app: deploy the app to production using optimised static files
 .PHONY: production/deploy/app
 production/deploy/app: confirm build/app
-	@echo 'Minifying CSS...'
+	@echo 'Minifying and compressing CSS...'
+	# App CSS
 	npx tailwindcss -i ./ui/static/input.css -o ./out/static/style.css --minify
+	brotli -f -o ./out/static/style.css.br ./out/static/style.css
+	gzip -k -f ./out/static/style.css
+	# Chroma CSS
 	minify ./ui/static/chroma.css -o ./out/static/chroma.css
+	brotli -f -o ./out/static/chroma.css.br ./out/static/chroma.css
+	gzip -k -f ./out/static/chroma.css
 	@echo 'Minifying JS...'
 	terser ./ui/static/input.js -o ./out/static/script.js --compress --mangle
+	brotli -f -o ./out/static/script.js.br ./out/static/script.js
+	gzip -k -f ./out/static/script.js
 	@echo 'Minifying HTML...'
 	minify -r ./ui/html/ -o ./out/html/
 	@echo 'Moving images into folder...'
