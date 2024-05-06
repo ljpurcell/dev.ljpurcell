@@ -2,8 +2,25 @@
 {{ .Post.Title }}
 {{end}}
 
-{{define "main"}}
-{{.Post.Content}}
+{{define "scripts"}}
 <link rel="stylesheet" href="/static/chroma.css{{ .EncodingExt }}" />
 <link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet">
+<script>
+    window.MathJax = {
+        tex: {
+            inlineMath: [['\(', '\)']],
+            displayMath: [['$$', '$$']]
+        },
+        svg: {
+            fontCache: 'global'
+        }
+    };
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+
+{{end}}
+
+{{define "main"}}
+{{.Post.Content}}
 {{end}}

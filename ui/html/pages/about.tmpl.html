@@ -1,5 +1,9 @@
 {{define "title"}}About{{end}}
 
+{{define "scripts"}}
+<script nonce="{{.Nonce}}" src="/static/script.js{{ .EncodingExt }}"></script>
+{{end}}
+
 {{define "main"}}
 <h1>About</h1>
 <p>Hi, I&#39;m Lyndon. </p>
@@ -61,5 +65,4 @@
         </li>
     </ul>
 </div>
-<script nonce="{{.Nonce}}" src="/static/script.js{{ .EncodingExt }}"></script>
 {{end}}
