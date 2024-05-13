@@ -48,11 +48,15 @@ type Post struct {
 
 type contextKey string
 
-const nonceKey contextKey = "nonce"
-const encodingKey contextKey = "encoding"
+const (
+	nonceKey    contextKey = "nonce"
+	encodingKey contextKey = "encoding"
+)
 
-const brEncoding string = "br"
-const gzipEncoding string = "gzip"
+const (
+	brEncoding   string = "br"
+	gzipEncoding string = "gzip"
+)
 
 var version string = vcs.Version()
 
@@ -65,11 +69,9 @@ func newHttpServer(addr string, handler http.Handler, logger *log.Logger) *http.
 		WriteTimeout: 5 * time.Second,
 		IdleTimeout:  120 * time.Second,
 	}
-
 }
 
 func main() {
-
 	displayVersion := flag.Bool("version", false, "Display version and exit")
 
 	// Configuration
