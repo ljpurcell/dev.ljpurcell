@@ -3,7 +3,6 @@ package main
 import "net/http"
 
 func (app *application) routes(staticDir string) http.Handler {
-
 	mux := http.NewServeMux()
 
 	// File server to serve static files

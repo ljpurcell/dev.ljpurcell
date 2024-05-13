@@ -11,9 +11,7 @@ import (
 Sets the headers for HTTP responses as well as static files.
 */
 func (app *application) commonHeaders(next http.Handler) http.HandlerFunc {
-
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-
 		nonce, err := app.generateNonce()
 		if err != nil {
 			app.serverError(w, r, err)
