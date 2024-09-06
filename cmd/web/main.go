@@ -20,7 +20,8 @@ import (
 
 // To hold application dependencies, enabling dependency injection
 type application struct {
-	logger *slog.Logger
+	inProduction bool
+	logger       *slog.Logger
 
 	// Syntax highlighting
 	defaultLang         string
@@ -43,10 +44,14 @@ type Post struct {
 	Title    string
 	Slug     string
 	Category string
+	Tags     []Tag
 	Content  template.HTML
 }
 
-type contextKey string
+type (
+	Tag        string
+	contextKey string
+)
 
 const (
 	nonceKey    contextKey = "nonce"
@@ -119,6 +124,7 @@ func main() {
 	}
 
 	app := &application{
+		inProduction:        *inProduction,
 		defaultLang:         "go",
 		logger:              logger,
 		htmlBlockFormatter:  htmlBlockFormatter,

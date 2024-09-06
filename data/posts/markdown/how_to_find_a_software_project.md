@@ -1,8 +1,8 @@
 ---
 title: How to Find a Software Project (for Learning)
 slug: learning
+tags: learning
 ---
-# How to Find a Software Project (for Learning)
 
 Learning is hard. That statement stands on its own. I don't need to qualify it further by saying *"Learning the guitar is hard"* or *"Learning physics is hard"*. Learning entails new, and new is hard.
 

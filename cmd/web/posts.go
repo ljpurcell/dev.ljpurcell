@@ -8,7 +8,7 @@ import (
 func (app *application) newPostCache() (map[string]*Post, error) {
 	cache := make(map[string]*Post)
 
-	const POSTS_DIR = "./markdown"
+	const POSTS_DIR = "./data/posts/markdown"
 
 	files, err := os.ReadDir(POSTS_DIR)
 	if err != nil {
