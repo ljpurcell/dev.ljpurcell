@@ -20,7 +20,8 @@ import (
 
 // To hold application dependencies, enabling dependency injection
 type application struct {
-	logger *slog.Logger
+	inProduction bool
+	logger       *slog.Logger
 
 	// Syntax highlighting
 	defaultLang         string
@@ -29,6 +30,7 @@ type application struct {
 	highlightStyle      *chroma.Style
 
 	postCache     map[string]*Post
+	tagCache      map[Tag][]Post
 	templateCache map[string]*template.Template
 }
 
@@ -37,16 +39,22 @@ type templateData struct {
 	Nonce       string
 	Post        Post
 	Posts       map[string]*Post
+	SelectedTag Tag
+	TagPosts    []Post
 }
 
 type Post struct {
 	Title    string
 	Slug     string
 	Category string
+	Tags     []Tag
 	Content  template.HTML
 }
 
-type contextKey string
+type (
+	Tag        string
+	contextKey string
+)
 
 const (
 	nonceKey    contextKey = "nonce"
@@ -119,6 +127,7 @@ func main() {
 	}
 
 	app := &application{
+		inProduction:        *inProduction,
 		defaultLang:         "go",
 		logger:              logger,
 		htmlBlockFormatter:  htmlBlockFormatter,
@@ -134,6 +143,7 @@ func main() {
 	}
 
 	app.postCache = postCache
+	app.tagCache = newTagCache(postCache)
 
 	server := newHttpServer(
 		*addr,

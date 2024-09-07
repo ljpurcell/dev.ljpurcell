@@ -1,10 +1,9 @@
 ---
 title: Selectionsort
 slug: selectionsort
+tags: algorithm, complexity analysis, go
 ---
 
-
-# Selectionsort
 Like [bubblesort](/post/bubblesort), selectionsort is another of the simple, but not fast (relatively speaking) algorithms. It operates in a manner similar to bubblesort, but makes *fewer* swaps. Thus, it can be can considered an optimisation of sorts, as it requires fewer operations over all. 
 
 It achieves this by tracking the **smallest** value it finds and then places that element into its final position with a single swap. Unlike bubblesort which walks an element to its final location, every step of the way.
