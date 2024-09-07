@@ -30,6 +30,7 @@ type application struct {
 	highlightStyle      *chroma.Style
 
 	postCache     map[string]*Post
+	tagCache      map[Tag][]Post
 	templateCache map[string]*template.Template
 }
 
@@ -38,6 +39,8 @@ type templateData struct {
 	Nonce       string
 	Post        Post
 	Posts       map[string]*Post
+	SelectedTag Tag
+	TagPosts    []Post
 }
 
 type Post struct {
@@ -140,6 +143,7 @@ func main() {
 	}
 
 	app.postCache = postCache
+	app.tagCache = newTagCache(postCache)
 
 	server := newHttpServer(
 		*addr,
