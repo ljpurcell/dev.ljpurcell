@@ -25,10 +25,10 @@
 
 <h1 id="post-title">{{ .Post.Title }}</h1>
 
-<div class="my-4 flex justify-start items-center">
+<div class="my-4 flex flex-wrap justify-start items-center">
 
     {{ range .Post.Tags }}
-    <a class="mr-4" href="/tag/{{ . | urlquery }}">#{{ . }}</a>
+    <a class="mr-4 opacity-50 font-bold hover:opacity-100" href="/tag/{{ . | urlquery }}">#{{ . }}</a>
     {{ end }}
 </div>
 
