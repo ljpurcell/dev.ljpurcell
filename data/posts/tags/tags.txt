@@ -1,3 +1,0 @@
-Go: Posts about, or that use, the Go programming language (Golang)
-Algorithms: Posts about the different algorithms, as well as their time and space complexities
-Complexity-Analysis: Posts about the analysis of different algorithms and how we can analyse their complexities
