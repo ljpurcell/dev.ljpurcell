@@ -53,6 +53,14 @@ func (app *application) parseFileIntoPost(p *Post, file string) error {
 	p.Slug = metaMap["slug"]
 	p.Category = metaMap["catergory"]
 
+	// Build tags slice
+	tagStrings := strings.Split(metaMap["tags"], ",")
+	p.Tags = make([]Tag, len(tagStrings))
+
+	for i, tag := range tagStrings {
+		p.Tags[i] = Tag(strings.Trim(tag, " \""))
+	}
+
 	html := app.mdToHTML([]byte(mu))
 	p.Content = template.HTML(html)
 

@@ -2,6 +2,8 @@ package main
 
 import (
 	"net/http"
+	"net/url"
+	"strings"
 )
 
 func (app *application) home(w http.ResponseWriter, r *http.Request) {
@@ -63,4 +65,24 @@ func (app *application) project(w http.ResponseWriter, r *http.Request) {
 
 func (app *application) projects(w http.ResponseWriter, r *http.Request) {
 	app.render(w, r, http.StatusOK, "projects.tmpl.html", templateData{})
+}
+
+func (app *application) tag(w http.ResponseWriter, r *http.Request) {
+	tag := strings.Trim(r.PathValue("tag"), " ")
+
+	posts, ok := app.tagCache[Tag(tag)]
+	if !ok {
+		app.clientError(w, 404)
+		return
+	}
+
+	tagText, err := url.QueryUnescape(tag)
+	if err != nil {
+		app.serverError(w, r, err)
+	}
+
+	app.render(w, r, http.StatusOK, "tag_posts.tmpl.html", templateData{
+		SelectedTag: Tag(tagText),
+		TagPosts:    posts,
+	})
 }

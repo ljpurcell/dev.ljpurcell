@@ -1,9 +1,8 @@
 ---
 title: Bubblesort
 slug: bubblesort
+tags: algorithm, complexity analysis, go
 ---
-
-# Bubblesort
 
 Some algorithms are fast. Some are simple. 
 
