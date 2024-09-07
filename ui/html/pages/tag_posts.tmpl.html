@@ -1,0 +1,14 @@
+{{define "title"}} {{ .SelectedTag }} {{end}}
+
+{{define "main"}}
+<h1>Tag: {{ .SelectedTag }}</h1>
+{{if .TagPosts }}
+{{range .TagPosts}}
+<div>
+    <a href="/post/{{.Slug}}">{{.Title}}</a>
+</div>
+{{end}}
+{{else}}
+<p>There doesn't seem to be any posts associated with this tag, sorry...</p>
+{{end}}
+{{end}}
