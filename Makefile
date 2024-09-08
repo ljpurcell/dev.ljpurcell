@@ -47,7 +47,7 @@ production/connect:
 .PHONY: production/push-blog-posts
 production/push-blog-posts: confirm
 	@echo 'Pushing blog posts to server...'
-	rsync -P ./markdown/ -r --delete ${production_non_root_user}@${production_host_ip}:~/markdown/
+	rsync -P ./data/posts/markdown/ -r --delete ${production_non_root_user}@${production_host_ip}:~/data/posts/markdown/
 	ssh -t ${production_non_root_user}@${production_host_ip} '\
 		sudo systemctl restart web \
 	'
@@ -75,7 +75,7 @@ production/deploy/app: confirm build/app
 	cp -R ./ui/static/img/ ./out/static/img/
 	rsync -P ./bin/linux_amd64/web ${production_non_root_user}@${production_host_ip}:~
 	rsync -P ./out/ -r --delete ${production_non_root_user}@${production_host_ip}:~/ui/
-	rsync -P ./markdown/ -r --delete ${production_non_root_user}@${production_host_ip}:~/markdown/
+	rsync -P ./data/posts/markdown/ -r --delete ${production_non_root_user}@${production_host_ip}:~/data/posts/markdown/
 	rsync -P ./remote/production/web.service ${production_non_root_user}@${production_host_ip}:~
 	ssh -t ${production_non_root_user}@${production_host_ip} '\
 	sudo mv ~/web.service /etc/systemd/system/ \
