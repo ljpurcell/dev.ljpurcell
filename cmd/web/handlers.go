@@ -70,16 +70,23 @@ func (app *application) projects(w http.ResponseWriter, r *http.Request) {
 func (app *application) tag(w http.ResponseWriter, r *http.Request) {
 	tag := strings.Trim(r.PathValue("tag"), " ")
 
-	posts, ok := app.tagCache[Tag(tag)]
-	if !ok {
-		app.clientError(w, 404)
-		return
-	}
+	posts, _ := app.tagCache[Tag(tag)]
 
 	tagText, err := url.QueryUnescape(tag)
 	if err != nil {
 		app.serverError(w, r, err)
 	}
+
+	// Lowercases everything except the first letter of each word
+	tagText = func(text string) string {
+		words := strings.Fields(text)
+
+		for i, word := range words {
+			words[i] = strings.ToUpper(string(word[0])) + strings.ToLower(word[1:])
+		}
+
+		return strings.Join(words, " ")
+	}(tagText)
 
 	app.render(w, r, http.StatusOK, "tag_posts.tmpl.html", templateData{
 		SelectedTag: Tag(tagText),
