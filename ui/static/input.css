@@ -63,7 +63,7 @@ li {
 
 /* Code */ 
 pre {
-  @apply p-6 my-6;
+  @apply p-6 my-6 border-2 border-neutral-300;
 }
 
 p > code {

@@ -29,17 +29,15 @@ The book was originally published in 1984, with a second edition being released 
 
 Comparably, the ancient Greeks had much to say about ethics, and their contributions have been formative to current conceptions, but they said all of it before we had modern science – which entails heliocentrism, evolution, the germ theory of disease, among many other [viewquake-level](https://www.lesswrong.com/posts/zCf3pnQmMhyEK8Lit/on-viewquakes#:~:text=a%20viewquake%20is%20an%20%22insight%20that%20dramatically%20changes%20one%27s%20worldview%2C%20making%20one%20see%20the%20world%20in%20a%20new%20way.%22) discoveries. 
 
-In the same way, Abelson and the Sussman – the authors of SICP – were writing at a (relatively) much time. Since then, new concepts have been coined; we know more about programming language design; hardware and resource constraints have evolved; and the process of constructing programs, large or small, has changed. 
+In the same way, Abelson and the Sussman – the authors of SICP – were writing from a much earlier point along the computer science timeline. Since then, new concepts have been coined; we know more about programming language design; hardware and resource constraints have evolved; and the process of constructing programs, large or small, has changed. 
 
 Things are different. 
-
-Is the book still relevant today?
 
 ## Is SICP still relevant?
 
 Yes.
 
-In an act of outright defiance to questions of this kind, a [third, adapted version of SICP](https://sourceacademy.org/sicpjs/index) was released in 2022. Nearly a full four-decades after the original (a relative eternity given the field itself is not that much older). This time, using a more modern programming language. The original versions of the book used a dialect of Lisp, a functional language, called Scheme (renamed to Racket). The adapted version has made use of a much more recognisable language to contemporary eyes: JavaScript.
+In an act of outright defiance to questions of this kind, a [third, adapted version of SICP](https://sourceacademy.org/sicpjs/index) was released in 2022. Nearly a full four-decades after the original; a relative eternity given the field itself is not that much older. This time, using a more modern programming language. The original versions of the book used a dialect of Lisp, a functional language, called Scheme (renamed to Racket). The adapted version has made use of a much more recognisable language to contemporary eyes: JavaScript.
 
 This changes both nothing and everything.
 
@@ -55,7 +53,7 @@ SICP is one of those book that has stared at me from my bookshelf, and desk, for
 
 I have attempted to do this, at least twice, previously. 
 
-Sometime around the end of 2020, I attempted to work my way through the (Scheme version) book. I made it to page 25. Of which, a good portion included introductory remarks and an outline of the book. Not exactly the crucial computer science content the book is renowned for and the reason I was reading it. I also skipped a significant number of the exercises or attempted them yet could not solve them. I desperately wanted to acquire the wisdom contained within the covers – but I was not ready.
+Sometime around the end of 2020, I attempted to work my way through the (Scheme version of the) book. I made it to page 25. Of which, a good portion included introductory remarks and an outline of the book. Not exactly the crucial computer science content the book is renowned for and the reason I was reading it. I also skipped a significant number of the exercises or attempted them yet could not solve them. I desperately wanted to acquire the wisdom contained within the covers – but I was not ready.
 
 Then, in mid-2022, the book was calling me again. This time, I thought I might give the modernised JavaScript version a go. While Scheme was chosen in the original books due to its ease of learning and minimal primitive complexity – allowing for maximal expression on behalf of the programmer – I still felt that it left me a half-step behind. Instead, I reasoned, I may be stacking the odds ever-so-slightly more in my favour if I could read the material and attempt the same problems when it was framed in terms of JavaScript. I made it some 90 pages. Better, but not far enough.
 
