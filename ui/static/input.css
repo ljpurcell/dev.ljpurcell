@@ -34,21 +34,21 @@ pre, code {
 
 
 /* Lists */
-  ul {
-    @apply list-disc;
-  }
+ul {
+  @apply list-disc;
+}
 
-  ol {
-    @apply list-decimal;
-  }
+ol {
+  @apply list-decimal;
+}
 
-   ol, ul {
-    @apply my-6 pl-6;
-  }
+ ol, ul {
+  @apply my-6 pl-6;
+}
 
-  li {
-    @apply pb-1;
-  }
+li {
+  @apply pb-1;
+}
 
 /* Links */
   /* In text */
@@ -62,21 +62,34 @@ pre, code {
   }
 
 /* Code */ 
-  pre {
-    @apply p-6 my-6;
-  }
+pre {
+  @apply p-6 my-6;
+}
 
-  p > code {
-    @apply p-1;
-  }
+p > code {
+  @apply p-1;
+}
 
-  blockquote {
-    @apply my-10 px-4 bg-neutral-900 border-2 border-cyan-300 rounded text-center;
-  }
+blockquote {
+  @apply my-10 px-4 bg-neutral-900 border-2 rounded border-cyan-300;
+}
 
-  blockquote > p {
-    @apply mb-4;
-  }
+blockquote[class="note"] {
+  @apply text-center;
+}
+
+
+blockquote[class="quote"] {
+  @apply text-left italic font-bold;
+}
+
+blockquote[class="quote"] > p[class="citation"] {
+  @apply mt-4 text-right font-light not-italic;
+}
+
+blockquote > p {
+  @apply mb-4;
+}
 
 
 /* Theme */

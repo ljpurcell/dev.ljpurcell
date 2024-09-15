@@ -69,7 +69,7 @@ func (app *application) parseFileIntoPost(p *Post, file string) error {
 
 func (app *application) mdToHTML(md []byte) []byte {
 	// Create MD parser with extensions
-	extensions := parser.CommonExtensions | parser.AutoHeadingIDs | parser.NoEmptyLineBeforeBlock | parser.SuperSubscript
+	extensions := parser.CommonExtensions | parser.AutoHeadingIDs | parser.NoEmptyLineBeforeBlock | parser.SuperSubscript | parser.Attributes
 	p := parser.NewWithExtensions(extensions)
 	doc := p.Parse(md)
 
