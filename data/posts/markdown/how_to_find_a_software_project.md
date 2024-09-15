@@ -30,6 +30,7 @@ One of my rationalisations for why I hadn't taken on any projects was that I did
 
 And here's the breakthrough that I finally made... are you ready? 
 
+{.note}
 > It's ok to make bad and contrived things. 
 
 If you believe in [Sturgeon's Law](https://en.wikipedia.org/wiki/Sturgeon%27s_law), then that shouldn't really matter. To put it bluntly, 9 out of 10 things you make will **mostly** suck... but you'll **nail** 1 in 10. 
@@ -40,7 +41,8 @@ The main point is give yourself permission to make something bad. Because it won
 
 It's a trap to consider your new projects (started or even just contemplating), which skew far more towards unfinished, and then compare those to all the amazing software you see out in the world. The latter err much more towards good end of the spectrum (and therefore much further away from the unfinished end). They are far later in their development and, in all likelihood, have had **tons** of crappy code laid down previously that has since been deleted or refactored.
 
-> __Note:__ I will add, though, something you make may not be as bad as you think. I have come to learn that even poor but tailored software very often ends up being better than very polished yet overly generalised software.
+{.note}
+> I will add, though, something you make may not be as bad as you think. I have come to learn that even poor but tailored software very often ends up being better than very polished yet overly generalised software.
 
 Earlier I said that not having a project to work on was a rationalisation. It was. In hindsight, there were many opportunities staring me in the face. It's a bit like Enlightenment in that sense though. You can only the see the profundity of the mundane once you're ready.
 
