@@ -80,7 +80,7 @@ blockquote[class="note"] {
 
 
 blockquote[class="quote"] {
-  @apply text-left italic font-bold;
+  @apply text-left italic font-semibold;
 }
 
 blockquote[class="quote"] > p[class="citation"] {
