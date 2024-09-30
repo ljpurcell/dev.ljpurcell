@@ -45,7 +45,7 @@ func (app *application) commonHeaders(next http.Handler) http.HandlerFunc {
 		}
 
 		if app.inProduction {
-			csp := fmt.Sprintf("default-src 'self'; style-src 'self' fonts.googleapis.com; font-src 'self' fonts.gstatic.com data:; script-src 'self' cdn.jsdelivr.net 'nonce-%s'", nonce)
+			csp := fmt.Sprintf("default-src 'self'; style-src 'self' fonts.googleapis.com 'nonce-%s' 'sha256-JLEjeN9e5dGsz5475WyRaoA4eQOdNPxDIeUhclnJDCE=' 'sha256-mQyxHEuwZJqpxCw3SLmc4YOySNKXunyu2Oiz1r3/wAE=' 'sha256-OCf+kv5Asiwp++8PIevKBYSgnNLNUZvxAp4a7wMLuKA=' 'sha256-eCTD+QYfH4HrSxin+UTLteBzkTlzwbXYHEWxsc26104='; font-src 'self' fonts.gstatic.com cdn.jsdelivr.net data:; script-src 'self' cdn.jsdelivr.net 'nonce-%s' 'unsafe-eval'", nonce, nonce)
 
 			w.Header().Set("Content-Security-Policy", csp)
 			w.Header().Set("Referrer-Policy", "origin-when-cross-origin")

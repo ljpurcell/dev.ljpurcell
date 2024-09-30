@@ -14,6 +14,9 @@
   }
   h3 {
     @apply text-3xl font-bold mt-8 mb-2;
+  } 
+  h4 {
+    @apply text-2xl font-semibold mt-6 mb-2;
   }
 
  .home > h1 {
@@ -80,7 +83,7 @@ blockquote[class="note"] {
 
 
 blockquote[class="quote"] {
-  @apply text-left italic font-semibold;
+  @apply text-left italic font-medium;
 }
 
 blockquote[class="quote"] > p[class="citation"] {

@@ -94,7 +94,7 @@ I will answer those questions in an almost entirely deferential manner, using qu
 > {.citation}
 > [Guy L. Steele Jr., Foreword - SICP:JS (2021)](https://sourceacademy.org/sicpjs/foreword02#p13)
 
-Here we see numerous references to the idea of program organisation, the importance of programs being descriptive and comprehensible by people, and the language-agnostic approach the book takes to these ideas.
+Here we see numerous references to the idea of program organisation, the importance of programs being descriptive and comprehensible to people, how computation is about processes, and the language-agnostic approach the book takes to exploration of all these topics.
 
 
 ## My experience with SICP
