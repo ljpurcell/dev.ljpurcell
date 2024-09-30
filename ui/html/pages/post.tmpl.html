@@ -5,11 +5,14 @@
 {{define "scripts"}}
 <link rel="stylesheet" href="/static/chroma.css{{ .EncodingExt }}" />
 <link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet">
-<script>
+<script nonce="{{.Nonce}}">
     window.MathJax = {
         tex: {
-            inlineMath: [['\(', '\)']],
+            inlineMath: [['\\(', '\\)']],
             displayMath: [['$$', '$$']]
+        },
+        chtml: {
+            adaptiveCSS: false  // Prevents MathJax from generating CSS dynamically
         },
         svg: {
             fontCache: 'global'
@@ -18,6 +21,11 @@
 </script>
 <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
+<!-- Alpine Plugins (Must be before Core) -->
+<script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/focus@3.x.x/dist/cdn.min.js"></script>
+
+<!-- Alpine Core -->
+<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
 {{end}}
 
