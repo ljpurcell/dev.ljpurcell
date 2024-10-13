@@ -43,6 +43,16 @@ production_non_root_user = 'ljpurcell'
 production/connect:
 	ssh -i ~/.ssh/id_rsa_${production_non_root_user} ${production_non_root_user}@${production_host_ip}
 
+## production/install-updates: update packages on server
+.PHONY: production/install-updates 
+production/install-updates:
+	ssh -t ${production_non_root_user}@${production_host_ip} '\
+		sudo apt-get update && \
+		sudo apt-get upgrade -y && \
+		sudo reboot \
+	'
+
+
 ## production/push-blog-posts: send all markdown blog posts  to the server
 .PHONY: production/push-blog-posts
 production/push-blog-posts: confirm
