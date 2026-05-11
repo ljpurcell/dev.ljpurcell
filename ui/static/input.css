@@ -4,115 +4,222 @@
 
 @layer components {
 
-  
-/* Headings */
- h1 {
-    @apply text-5xl font-black mt-16 mb-10;
-  }
-  h2 {
-    @apply text-4xl font-bold mt-16 mb-4 text-green-300;
-  }
-  h3 {
-    @apply text-3xl font-bold mt-8 mb-2;
-  } 
-  h4 {
-    @apply text-2xl font-semibold mt-6 mb-2;
+  /* ── Variables ───────────────────────────────────────────── */
+  :root {
+    --bg:           #111111;
+    --bg-subtle:    #1a1a1a;
+    --text:         #e2ded6;
+    --text-muted:   #86827a;
+    --accent:       #c8a96e;
+    --accent-hover: #d4b87e;
+    --border:       #272727;
+    --font-sans:    "Iosevka Aile Iaso", system-ui, -apple-system, sans-serif;
+    --font-mono:    "Iosevka Curly Iaso", "SFMono-Regular", Consolas, monospace;
   }
 
- .home > h1 {
-    @apply text-5xl text-gray-300;
-  }
-  
-  .home > h2 {
-    @apply text-4xl text-gray-300 font-bold;
-  }
-  
-  .home > h3 {
-    @apply text-3xl text-gray-300 font-bold;
+  /* ── Reset / Base ────────────────────────────────────────── */
+  *, *::before, *::after {
+    box-sizing: border-box;
   }
 
-pre, code {
-    font-family: 'Fira Code', monospace;
-}
-
-
-/* Lists */
-ul {
-  @apply list-disc;
-}
-
-ol {
-  @apply list-decimal;
-}
-
- ol, ul {
-  @apply my-6 pl-6;
-}
-
-li {
-  @apply pb-1;
-}
-
-/* Links */
-  /* In text */
-  main > p > a {
-    @apply text-purple-300 font-bold hover:decoration-purple-400 hover:text-purple-400;
+  html {
+    font-size: 17px;
+    scroll-behavior: smooth;
   }
 
-  /* Navigation */
-  a {
-    @apply text-base hover:underline hover:decoration-purple-400;
-  }
-
-/* Code */ 
-pre {
-  @apply p-6 my-6 border-2 border-neutral-300;
-}
-
-p > code {
-  @apply p-1;
-}
-
-blockquote {
-  @apply my-10 px-4 bg-neutral-900 border-2 rounded border-cyan-300;
-}
-
-blockquote[class="note"] {
-  @apply text-center;
-}
-
-
-blockquote[class="quote"] {
-  @apply text-left italic font-medium;
-}
-
-blockquote[class="quote"] > p[class="citation"] {
-  @apply mt-4 text-right font-light not-italic;
-}
-
-blockquote > p {
-  @apply mb-4;
-}
-
-
-/* Theme */
-  p, div {
-    @apply mt-4 mb-8 leading-loose;
-  }
-
+  /* ── Theme ───────────────────────────────────────────────── */
   .theme {
-    @apply text-base bg-neutral-800 text-gray-300;
+    @apply min-h-screen;
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: var(--font-sans);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
   }
 
   .container {
-    @apply mx-auto px-4 lg:px-2 2xl:px-0 w-full max-w-4xl 2xl:max-w-6xl min-h-screen;
+    @apply mx-auto px-6 w-full;
+    max-width: 680px;
   }
 
-  .emphasize {
-    @apply text-cyan-300 font-extrabold;
+  /* ── Typography ──────────────────────────────────────────── */
+  h1 {
+    font-size: 1.6rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    margin: 0;
   }
 
-  .home {
-    @apply space-y-16 text-lg;
+  h2 {
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+    margin: 0;
   }
+
+  p {
+    margin: 0;
+    color: var(--text);
+  }
+
+  /* ── Links ───────────────────────────────────────────────── */
+  a {
+    color: var(--accent);
+    text-decoration: none;
+    transition: color 0.1s;
+  }
+
+  a:hover {
+    color: var(--accent-hover);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  /* ── Nav / Header ────────────────────────────────────────── */
+  .site-header {
+    display: flex;
+    align-items: center;
+    padding: 1.25rem 0;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 0;
+  }
+
+  .site-title {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    letter-spacing: 0.02em;
+    font-family: var(--font-mono);
+  }
+
+  .site-title:hover {
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  /* ── Portfolio layout ────────────────────────────────────── */
+  .portfolio {
+    padding: 4rem 0 6rem;
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+  }
+
+  /* ── Intro ───────────────────────────────────────────────── */
+  .intro-name {
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    margin-bottom: 0.2rem;
+  }
+
+  .intro-title {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    margin-bottom: 1.25rem;
+  }
+
+  .intro-tagline {
+    font-size: 0.9375rem;
+    color: var(--text);
+    line-height: 1.7;
+    max-width: 560px;
+  }
+
+  /* ── Section ─────────────────────────────────────────────── */
+  .section-label {
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+    margin-bottom: 2rem;
+  }
+
+  /* ── Work entries ────────────────────────────────────────── */
+  .work-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .work-entry {
+    padding: 1.75rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .work-entry:first-child {
+    padding-top: 0;
+    border-top: 1px solid var(--border);
+  }
+
+  .work-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 0.2rem;
+  }
+
+  .work-company {
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: var(--text);
+    letter-spacing: -0.01em;
+  }
+
+  .work-dates {
+    font-size: 0.775rem;
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+  }
+
+  .work-role {
+    font-size: 0.8125rem;
+    color: var(--text-muted);
+    margin-bottom: 1rem;
+  }
+
+  .work-body {
+    font-size: 0.9rem;
+    color: var(--text);
+    line-height: 1.7;
+  }
+
+
+  /* ── Contact ─────────────────────────────────────────────── */
+  .contact-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .contact-list li {
+    font-size: 0.9rem;
+  }
+
+  /* ── Footer ──────────────────────────────────────────────── */
+  .site-footer {
+    border-top: 1px solid var(--border);
+    padding: 1.5rem 0;
+    font-size: 0.775rem;
+    color: var(--text-muted);
+  }
+
+  .site-footer a {
+    color: var(--text-muted);
+  }
+
+  .site-footer a:hover {
+    color: var(--text);
+    text-decoration: none;
+  }
+
 }

@@ -1,40 +1,57 @@
-{{define "title"}}
-Home
-{{end}}
+{{define "title"}}Lyndon Purcell{{end}}
 
 {{define "main"}}
-<div class="home">
-    <h1>
-        Hi, my name is <span class="emphasize">Lyndon</span>.
-    </h1>
+<div class="portfolio">
 
-    <h2>
-        I'm a <span class="emphasize">software engineer</span> who builds web applications, command line
-        tools, and automation scripts.
-    </h2>
+    <section>
+        <p class="intro-name">Lyndon Purcell</p>
+        <p class="intro-title">Senior Software Engineer</p>
+        <p class="intro-tagline">I work upstream — questioning what to build before how, trimming before adding, and building tools that give other engineers speed and clarity.</p>
+    </section>
 
-    <h2>
-        I have a deep interest in creating things that are not only <span class="emphasize">correct</span>,
-        but <span class="emphasize">efficient</span>.
-    </h2>
+    <section>
+        <p class="section-label">Work</p>
+        <div class="work-list">
 
-    <div>
-        <div class="font-bold">
-            You can use this site to:
+            <div class="work-entry">
+                <div class="work-meta">
+                    <span class="work-company">Pathify</span>
+                    <span class="work-dates">2025 – present</span>
+                </div>
+                <p class="work-role">Senior Software Engineer · Integrations · Remote</p>
+                <p class="work-body">Built the developer tooling layer for Pathify's in-house configuration language: a static analyser (Preheat), a formatter, and a language server — giving the team IDE-quality feedback in CI/CD and locally. Teammates called it "a game changer" and "one of the most impressive tools we have." Led development of user provisioning, the integration used by every customer and their first interaction with the system. Also drove large-scale migrations across the codebase and hardened the CI/CD pipeline, including resolving a critical GitHub Actions vulnerability.</p>
+            </div>
+
+            <div class="work-entry">
+                <div class="work-meta">
+                    <span class="work-company">OK200 Software &amp; Apps</span>
+                    <span class="work-dates">2022 – 2024</span>
+                </div>
+                <p class="work-role">Software Engineer · Melbourne, Australia</p>
+                <p class="work-body">Backend and frontend work across more than a dozen SaaS products — API construction, cloud storage on AWS, asynchronous task processing, and interactive UI components.</p>
+            </div>
+
+            <div class="work-entry">
+                <div class="work-meta">
+                    <span class="work-company">Australian Bureau of Statistics</span>
+                    <span class="work-dates">2022 – 2023</span>
+                </div>
+                <p class="work-role">Operations Analyst · Geelong, Australia</p>
+                <p class="work-body">Data analysis, database maintenance, and process improvement.</p>
+            </div>
+
         </div>
-        <ul>
-            <li>
-                <a href="/about">learn more about me</a>
-            </li>
-            <li>
-                <a href="/projects">check out projects I have built</a>
-            </li>
-            <li>
-                <a href="/posts">read blog posts I have written</a>
-            </li>
-            <li>
-                <a href="/about#contact">get in contact</a>
-            </li>
-    </div>
+    </section>
+
+    <section id="contact">
+        <p class="section-label">Contact</p>
+        <ul class="contact-list">
+            <li><a href="https://github.com/ljpurcell" target="_blank">GitHub</a></li>
+            <li><a href="https://www.linkedin.com/in/ljpurcell" target="_blank">LinkedIn</a></li>
+            <li><a href="mailto:ljpurcell.dev@gmail.com">ljpurcell.dev@gmail.com</a></li>
+            <li><a href="/resume.pdf" target="_blank">Resume</a></li>
+        </ul>
+    </section>
+
 </div>
 {{end}}
