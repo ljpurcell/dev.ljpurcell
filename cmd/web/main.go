@@ -11,50 +11,22 @@ import (
 	"os"
 	"time"
 
-	"github.com/alecthomas/chroma/v2"
-	"github.com/alecthomas/chroma/v2/formatters/html"
-	"github.com/alecthomas/chroma/v2/styles"
 	"github.com/ljpurcell/dev.ljpurcell/internal/vcs"
 	"golang.org/x/crypto/acme/autocert"
 )
 
-// To hold application dependencies, enabling dependency injection
 type application struct {
-	inProduction bool
-	logger       *slog.Logger
-
-	// Syntax highlighting
-	defaultLang         string
-	htmlBlockFormatter  *html.Formatter
-	htmlInlineFormatter *html.Formatter
-	highlightStyle      *chroma.Style
-
-	postCache     map[string]*Post
-	tagCache      map[Tag][]Post
+	inProduction  bool
+	logger        *slog.Logger
 	templateCache map[string]*template.Template
 }
 
 type templateData struct {
 	EncodingExt string
 	Nonce       string
-	Post        Post
-	Posts       map[string]*Post
-	SelectedTag Tag
-	TagPosts    []Post
 }
 
-type Post struct {
-	Title    string
-	Slug     string
-	Category string
-	Tags     []Tag
-	Content  template.HTML
-}
-
-type (
-	Tag        string
-	contextKey string
-)
+type contextKey string
 
 const (
 	nonceKey    contextKey = "nonce"
@@ -82,10 +54,9 @@ func newHttpServer(addr string, handler http.Handler, logger *log.Logger) *http.
 func main() {
 	displayVersion := flag.Bool("version", false, "Display version and exit")
 
-	// Configuration
 	addr := flag.String("addr", ":8080", "HTTP network address")
 	staticDir := flag.String("staticDir", "./ui/static/", "Directory of the static assets")
-	inProduction := flag.Bool("in-production", false, "Is the app runnning in a production environment")
+	inProduction := flag.Bool("in-production", false, "Is the app running in a production environment")
 
 	flag.Parse()
 
@@ -94,31 +65,9 @@ func main() {
 		os.Exit(0)
 	}
 
-	// Logger
 	logger := slog.New(slog.NewTextHandler(os.Stdout, &slog.HandlerOptions{
 		AddSource: true,
 	}))
-
-	// Formatters for code blocks
-	// Class definitions for style in ./ui/static/chroma.css
-	htmlBlockFormatter := html.New(html.WithClasses(true), html.TabWidth(4))
-	if htmlBlockFormatter == nil {
-		logger.Error("Could not create html block formatter")
-		os.Exit(1)
-	}
-
-	htmlInlineFormatter := html.New(html.WithClasses(true), html.InlineCode(true))
-	if htmlInlineFormatter == nil {
-		logger.Error("Could not create html inline formatter")
-		os.Exit(1)
-	}
-
-	// Syntax highlighting
-	highlightStyle := styles.Get("github-dark")
-	if highlightStyle == nil {
-		logger.Error("Could not find style 'github-dark'")
-		os.Exit(1)
-	}
 
 	templateCache, err := newTemplateCache()
 	if err != nil {
@@ -127,23 +76,10 @@ func main() {
 	}
 
 	app := &application{
-		inProduction:        *inProduction,
-		defaultLang:         "go",
-		logger:              logger,
-		htmlBlockFormatter:  htmlBlockFormatter,
-		htmlInlineFormatter: htmlInlineFormatter,
-		highlightStyle:      highlightStyle,
-		templateCache:       templateCache,
+		inProduction:  *inProduction,
+		logger:        logger,
+		templateCache: templateCache,
 	}
-
-	postCache, err := app.newPostCache()
-	if err != nil {
-		logger.Error(fmt.Sprintf("Could not create post cache: %v", err))
-		os.Exit(1)
-	}
-
-	app.postCache = postCache
-	app.tagCache = newTagCache(postCache)
 
 	server := newHttpServer(
 		*addr,
@@ -184,7 +120,6 @@ func main() {
 		logger.Error(err.Error())
 		os.Exit(1)
 	} else {
-
 		logger.Info("Starting HTTP server...", "addr", server.Addr)
 
 		err = server.ListenAndServe()
