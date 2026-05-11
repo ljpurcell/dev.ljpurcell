@@ -28,3 +28,4 @@ test*md
 .env
 bin/
 out/
+node_modules/
