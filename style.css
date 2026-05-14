@@ -13,14 +13,13 @@
   --accent:       #c8a96e;
   --accent-hover: #d4b87e;
   --border:       #272727;
-  --font-sans:    "Iosevka Aile Iaso", system-ui, -apple-system, sans-serif;
-  --font-mono:    "Iosevka Curly Iaso", "SFMono-Regular", Consolas, monospace;
+  --font-sans:    system-ui, -apple-system, sans-serif;
+  --font-mono:    "SFMono-Regular", Consolas, monospace;
 }
 
 /* ── Base ────────────────────────────────────────────────── */
 html {
   font-size: 17px;
-  scroll-behavior: smooth;
 }
 
 body {
@@ -30,6 +29,7 @@ body {
   line-height: 1.7;
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 a {
@@ -179,7 +179,7 @@ a:hover {
 .site-footer {
   border-top: 1px solid var(--border);
   padding: 1.5rem 0 2.5rem;
-  font-size: 0.775rem;
+  font-size: 0.75rem;
 }
 
 .site-footer a {
@@ -210,4 +210,8 @@ a:hover {
     flex-direction: column;
     gap: 0.15rem;
   }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
 }
