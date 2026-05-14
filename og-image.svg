@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <rect width="1200" height="630" fill="#111111"/>
+  <rect x="40" y="40" width="1120" height="550" fill="none" stroke="#272727" stroke-width="1"/>
+  <rect x="80" y="88" width="56" height="3" fill="#c8a96e"/>
+  <text x="80" y="300" font-family="system-ui,-apple-system,sans-serif" font-size="80" font-weight="700" letter-spacing="-2" fill="#e2ded6">Lyndon Purcell</text>
+  <text x="83" y="356" font-family="'SFMono-Regular',Consolas,monospace" font-size="20" fill="#86827a" letter-spacing="3">SENIOR SOFTWARE ENGINEER</text>
+  <text x="80" y="440" font-family="system-ui,-apple-system,sans-serif" font-size="22" fill="#86827a">I'd rather remove a problem than solve it.</text>
+  <text x="80" y="548" font-family="'SFMono-Regular',Consolas,monospace" font-size="17" fill="#c8a96e">ljpurcell.com</text>
+</svg>
