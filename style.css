@@ -105,8 +105,8 @@ a:hover {
 }
 
 .intro-links {
-  margin-top: 3rem;
-  font-size: 0.6875rem;
+  margin-top: 2.25rem;
+  font-size: 0.7rem;
   font-family: var(--font-mono);
   letter-spacing: 0.04em;
 }
