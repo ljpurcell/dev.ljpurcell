@@ -75,7 +75,7 @@ a:hover {
 
 /* ── Portfolio ───────────────────────────────────────────── */
 .portfolio {
-  padding: 3.5rem 0 6rem;
+  padding: 3.5rem 0 4.5rem;
   display: flex;
   flex-direction: column;
   gap: 3.5rem;
@@ -105,7 +105,7 @@ a:hover {
 }
 
 .intro-links {
-  margin-top: 2.25rem;
+  margin-top: 2rem;
   font-size: 0.7rem;
   font-family: var(--font-mono);
   letter-spacing: 0.04em;
@@ -113,9 +113,10 @@ a:hover {
 
 /* ── Stack ───────────────────────────────────────────────── */
 .stack-line {
-  font-size: 0.875rem;
+  font-size: 0.9375rem;
   color: var(--text);
-  line-height: 1.6;
+  line-height: 1.7;
+  max-width: 600px;
 }
 
 /* ── Section label ───────────────────────────────────────── */
@@ -171,6 +172,11 @@ a:hover {
   font-size: 0.9375rem;
   color: var(--text);
   line-height: 1.75;
+  max-width: 600px;
+}
+
+.work-body strong {
+  font-weight: 600;
 }
 
 .work-body + .work-body {
