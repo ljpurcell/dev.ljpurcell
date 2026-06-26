@@ -105,10 +105,10 @@ a:hover {
 }
 
 .intro-links {
-  margin-top: 1.875rem;
-  font-size: 0.75rem;
+  margin-top: 3rem;
+  font-size: 0.6875rem;
   font-family: var(--font-mono);
-  letter-spacing: 0.01em;
+  letter-spacing: 0.04em;
 }
 
 /* ── Stack ───────────────────────────────────────────────── */
