@@ -105,32 +105,17 @@ a:hover {
 }
 
 .intro-links {
-  margin-top: 1.25rem;
-  font-size: 0.8125rem;
+  margin-top: 1.875rem;
+  font-size: 0.75rem;
   font-family: var(--font-mono);
   letter-spacing: 0.01em;
 }
 
 /* ── Stack ───────────────────────────────────────────────── */
-.stack {
-  display: flex;
-  flex-direction: column;
-  gap: 0.55rem;
-}
-
-.stack-row {
-  display: grid;
-  grid-template-columns: 6.5rem 1fr;
-  gap: 0.75rem;
+.stack-line {
   font-size: 0.875rem;
+  color: var(--text);
   line-height: 1.6;
-}
-
-.stack-key {
-  color: var(--text-muted);
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  padding-top: 0.1rem;
 }
 
 /* ── Section label ───────────────────────────────────────── */
@@ -238,11 +223,6 @@ a:hover {
   .work-meta {
     flex-direction: column;
     gap: 0.15rem;
-  }
-
-  .stack-row {
-    grid-template-columns: 1fr;
-    gap: 0.1rem;
   }
 }
 
