@@ -5,24 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta
       name="description"
-      content="Lyndon Purcell — Senior Software Engineer"
+      content="Lyndon Purcell — Senior Software Engineer specialising in developer tooling: static analysis, language servers, and developer experience."
     />
     <meta name="theme-color" content="#111111" />
     <meta property="og:type" content="website" />
     <meta
       property="og:title"
-      content="Lyndon Purcell — Senior Software Engineer"
+      content="Lyndon Purcell — Senior Software Engineer · Developer Tooling"
     />
     <meta
       property="og:description"
-      content="I'd rather remove a problem than solve it. Most of my best work has been upstream — tools and systems that reduced friction for the engineers around me."
+      content="I build the tools that make other engineers faster — static analysers, language servers, and CI/CD automation."
     />
     <meta property="og:url" content="https://ljpurcell.com" />
     <meta property="og:image" content="https://ljpurcell.com/og-image.png" />
     <meta name="twitter:card" content="summary_large_image" />
     <link rel="stylesheet" href="style.css" />
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23111'/><text x='8' y='24' font-family='system-ui' font-size='22' font-weight='700' fill='%23c8a96e'>L</text></svg>">
-    <title>Lyndon Purcell — Senior Software Engineer</title>
+    <title>Lyndon Purcell — Senior Software Engineer · Developer Tooling</title>
   </head>
   <body>
     <header class="container">
@@ -35,12 +35,42 @@
       <div class="portfolio">
         <section>
           <h1 class="intro-name">Lyndon Purcell</h1>
-          <p class="intro-title">Senior Software Engineer</p>
+          <p class="intro-title">Senior Software Engineer · Developer Tooling &amp; DX</p>
           <p class="intro-tagline">
-            I'd rather remove a problem than solve it. Most of my best work has
-            been upstream — tools and systems that reduced friction for the
-            engineers around me.
+            I build the tools that make other engineers faster — static
+            analysers, language servers, formatters, and CI/CD automation. I'd
+            rather remove a problem than solve it; most of my best work has been
+            upstream, reducing friction for the team around me.
           </p>
+          <p class="intro-links">
+            <a href="/Lyndon-Purcell-CV.pdf" target="_blank" rel="noopener"
+              >Résumé (PDF)</a
+            >
+          </p>
+        </section>
+
+        <section>
+          <h2 class="section-label">Stack</h2>
+          <div class="stack">
+            <p class="stack-row">
+              <span class="stack-key">Specialties</span>
+              <span
+                >Static analysis · Language tooling (LSP, formatters) · CI/CD ·
+                Developer experience · Large-scale migration</span
+              >
+            </p>
+            <p class="stack-row">
+              <span class="stack-key">Languages</span>
+              <span>Go · Python · JavaScript / TypeScript · C# · PHP · SQL</span>
+            </p>
+            <p class="stack-row">
+              <span class="stack-key">Tools</span>
+              <span
+                >AWS · Git / GitHub Actions · PostgreSQL · Redis · Meilisearch ·
+                Neovim</span
+              >
+            </p>
+          </div>
         </section>
 
         <section>
@@ -55,27 +85,36 @@
                 Senior Software Engineer · Integrations · Remote
               </p>
               <p class="work-body">
-                Built the developer tooling suite for Pathify's in-house
-                configuration language — a static analyser, a formatter, and a
-                language server.
+                Built and own Pathify's developer-tooling suite for its in-house
+                config language: <strong>Preheat</strong> (a Go static
+                analyser), <strong>Splash</strong> (a language server), and
+                <strong>Stir</strong> (a formatter) — taking a tooling-less DSL
+                to IDE-grade tooling. Adopted across the whole engineering team;
+                teammates called it "a game changer."
               </p>
               <p class="work-body">
-                Led development of user provisioning — Pathify's most complex
-                integration, used by every customer as their first interaction
-                with the system.
+                Wrote automation that eliminated repetitive work across hundreds
+                of integrations and thousands of files, and drove a ~1,100-file
+                catalog migration with minimal downtime.
+              </p>
+              <p class="work-body">
+                Hardened CI/CD by finding and fixing a critical GitHub Actions
+                vulnerability. Led user provisioning — Pathify's most complex
+                integration — and delivered the Jenzabar integration, unblocking
+                ~15% of the market.
               </p>
             </div>
 
             <div class="work-entry">
               <div class="work-meta">
                 <span class="work-company">OK200 Software &amp; Apps</span>
-                <span class="work-dates">2 yrs 4 mos</span>
+                <span class="work-dates">Sep 2022 – Dec 2024</span>
               </div>
               <p class="work-role">Software Engineer · Melbourne, Australia</p>
               <p class="work-body">
-                Shipped backend and frontend code across more than a dozen SaaS
-                products — APIs, AWS infrastructure, async task processing, and
-                UI components.
+                Shipped backend and frontend across more than a dozen SaaS
+                products — API design, AWS infrastructure, event-driven systems,
+                async task processing, and UI components against those APIs.
               </p>
             </div>
 
@@ -84,11 +123,32 @@
                 <span class="work-company"
                   >Australian Bureau of Statistics</span
                 >
-                <span class="work-dates">1 yr 6 mos</span>
+                <span class="work-dates">Jan 2022 – Jul 2023</span>
               </div>
               <p class="work-role">Operations Analyst · Geelong, Australia</p>
               <p class="work-body">
-                Data analysis, database maintenance, and process improvement.
+                Data analysis, database maintenance, and automation scripting to
+                streamline collection and reporting. Promoted within six months.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <h2 class="section-label">Project</h2>
+          <div class="work-list">
+            <div class="work-entry">
+              <div class="work-meta">
+                <span class="work-company">Stem — Coaching SaaS</span>
+                <span class="work-dates">Go · SvelteKit · Flutter · Postgres</span>
+              </div>
+              <p class="work-role">Solo-built · In development</p>
+              <p class="work-body">
+                A multi-tenant Go API (Chi, sqlc, pgx) with per-tenant isolation
+                at the query layer, JWT auth using rotating refresh tokens with
+                reuse detection, and two-sided Stripe Connect payments. Built
+                and owned end-to-end across the Go backend, SvelteKit web, and
+                Flutter mobile.
               </p>
             </div>
           </div>
