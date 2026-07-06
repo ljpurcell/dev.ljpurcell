@@ -119,6 +119,37 @@ a:hover {
   max-width: 600px;
 }
 
+/* ── Taste ───────────────────────────────────────────────── */
+.taste-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.taste-list li {
+  max-width: 600px;
+}
+
+.taste-principle {
+  font-size: 0.9375rem;
+  color: var(--text);
+  line-height: 1.75;
+}
+
+.taste-example {
+  margin-top: 0.25rem;
+  font-size: 0.9375rem;
+  color: var(--text-muted);
+  line-height: 1.75;
+}
+
+.taste-example-label {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+}
+
 /* ── Section label ───────────────────────────────────────── */
 .section-label {
   display: block;

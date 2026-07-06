@@ -21,7 +21,10 @@
     <meta property="og:image" content="https://ljpurcell.com/og-image.png" />
     <meta name="twitter:card" content="summary_large_image" />
     <link rel="stylesheet" href="style.css" />
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23111'/><text x='8' y='24' font-family='system-ui' font-size='22' font-weight='700' fill='%23c8a96e'>L</text></svg>">
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23111'/><text x='8' y='24' font-family='system-ui' font-size='22' font-weight='700' fill='%23c8a96e'>L</text></svg>"
+    />
     <title>Lyndon Purcell — Senior Software Engineer · Developer Tooling</title>
   </head>
   <body>
@@ -35,7 +38,9 @@
       <div class="portfolio">
         <section>
           <h1 class="intro-name">Lyndon Purcell</h1>
-          <p class="intro-title">Senior Software Engineer · Developer Tooling &amp; DX</p>
+          <p class="intro-title">
+            Senior Software Engineer · Developer Tooling &amp; DX
+          </p>
           <p class="intro-tagline">
             I work upstream. I'd rather remove a problem than solve it, and most
             of my best work has been in static analysis, language tooling, and
@@ -57,6 +62,62 @@
         </section>
 
         <section>
+          <h2 class="section-label">Taste</h2>
+          <ul class="taste-list">
+            <li>
+              <p class="taste-principle">
+                Most bad developer experience, bugs included, is bad
+                abstraction: too much indirection, or the wrong concepts
+                entirely, until the problem is harder to reason about than it
+                needs to be.
+              </p>
+              <p class="taste-example">
+                <span class="taste-example-label">Example:</span> React.
+              </p>
+            </li>
+            <li>
+              <p class="taste-principle">
+                The best fix removes the class of problems.
+              </p>
+              <p class="taste-example">
+                <span class="taste-example-label">Example:</span> A static
+                analyser beats a hundred review comments.
+              </p>
+            </li>
+            <li>
+              <p class="taste-principle">
+                Have a deterministic layer that you control in the age of AI.
+              </p>
+              <p class="taste-example">
+                <span class="taste-example-label">Example:</span> Reinforcing
+                non-deterministic agents with deterministic tooling buys control
+                and leverage at almost no cost.
+              </p>
+            </li>
+            <li>
+              <p class="taste-principle">
+                Make something as simple as possible, but not simpler.
+              </p>
+              <p class="taste-example">
+                <span class="taste-example-label">Example:</span> This site is
+                plain HTML on a CDN. It used to be a Go server, and that was the
+                wrong call.
+              </p>
+            </li>
+            <li>
+              <p class="taste-principle">
+                Small, sharp and focused tools that allow for control.
+              </p>
+              <p class="taste-example">
+                <span class="taste-example-label">Example:</span> I work in
+                Neovim and the terminal, tools I can see all the way through and
+                tune to my own quirks.
+              </p>
+            </li>
+          </ul>
+        </section>
+
+        <section>
           <h2 class="section-label">Work</h2>
           <div class="work-list">
             <div class="work-entry">
@@ -69,8 +130,8 @@
               </p>
               <p class="work-body">
                 Built and own Pathify's developer-tooling suite for its in-house
-                config language: <strong>Preheat</strong> (a static
-                analyser), <strong>Splash</strong> (a language server), and
+                config language: <strong>Preheat</strong> (a static analyser),
+                <strong>Splash</strong> (a language server), and
                 <strong>Stir</strong> (a formatter), taking a tooling-less DSL
                 to IDE-grade tooling. Adopted across the whole engineering team;
                 teammates called it "a game changer."
@@ -114,7 +175,9 @@
             <div class="work-entry">
               <div class="work-meta">
                 <span class="work-company">Stem · Coaching SaaS</span>
-                <span class="work-dates">Go · SvelteKit · Flutter · Postgres</span>
+                <span class="work-dates"
+                  >Go · SvelteKit · Flutter · Postgres</span
+                >
               </div>
               <p class="work-role">Solo-built · In development</p>
               <p class="work-body">
